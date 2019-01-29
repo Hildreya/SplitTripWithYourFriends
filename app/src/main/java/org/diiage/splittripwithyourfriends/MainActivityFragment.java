@@ -1,5 +1,6 @@
 package org.diiage.splittripwithyourfriends;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

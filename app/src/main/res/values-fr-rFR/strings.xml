@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SplitTrip avec vos amis</string>
+    <string name="action_settings">Options</string>
+    <string name="action_add_participant">Ajouter un participant</string>
+</resources>

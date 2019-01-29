@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
         fab.setOnClickListener(view -> {
             Intent i = new Intent(this, CreateTripActivity.class);
+            startActivity(i);
+        });
+
+        Button btn = (Button) findViewById(R.id.button2);
+
+        btn.setOnClickListener(view -> {
+            Intent i = new Intent(this, HomeTripActivity.class);
             startActivity(i);
         });
     }
