@@ -20,7 +20,6 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.adapters.TripAdapter;
 import org.diiage.splittripwithyourfriends.databinding.FragmentMainBinding;
 import org.diiage.splittripwithyourfriends.entities.Trip;
-import org.diiage.splittripwithyourfriends.ui.createtrip.CreateTripViewModel;
 import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
 import java.util.ArrayList;
@@ -44,14 +43,12 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         FragmentMainBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
-        binding.setStrHelloWorld("Test binding");
         mainFragmentViewModel = ViewModelProviders.of(this).get(MainFragmentViewModel.class);
 
         mainFragmentViewModel.getmAllTrips().observe(this, trips -> {
             tripAdapter.setTrips(trips);
         });
         recyclerView = binding.getRoot().findViewById(R.id.tripList);
-
         return binding.getRoot();
     }
 

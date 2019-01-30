@@ -1,12 +1,14 @@
 package org.diiage.splittripwithyourfriends;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import org.diiage.splittripwithyourfriends.databinding.HomeTripActivityBinding;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
 
 public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -14,7 +16,7 @@ public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_trip_activity);
+        HomeTripActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.home_trip_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, HomeTripFragment.newInstance())

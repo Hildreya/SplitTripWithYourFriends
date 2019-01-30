@@ -19,13 +19,13 @@ public class Trip {
     @NonNull
     private String name;
 
-    @ColumnInfo(name = "begin_date")
+    /*@ColumnInfo(name = "begin_date")
     @TypeConverters(DateConverter.class)
     private Date beginDate;
 
     @ColumnInfo(name = "end_date")
     @TypeConverters(DateConverter.class)
-    private Date endDate;
+    private Date endDate;*/
 
     @ColumnInfo(name = "statutId")
     private int statutId;
@@ -49,7 +49,7 @@ public class Trip {
         return id;
     }
 
-    public Date getBeginDate() {
+    /*public Date getBeginDate() {
         return beginDate;
     }
 
@@ -63,7 +63,7 @@ public class Trip {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
+    }*/
     public int getStatutId() {
         return statutId;
     }

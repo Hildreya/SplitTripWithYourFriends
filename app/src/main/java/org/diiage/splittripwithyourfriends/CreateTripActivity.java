@@ -5,19 +5,19 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.databinding.CreateTripActivityBinding;
 import org.diiage.splittripwithyourfriends.ui.createtrip.CreateTripFragment;
 
 public class CreateTripActivity extends AppCompatActivity {
 
-/*    private CreateTripActivityBinding binding;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CreateTripActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.create_trip_activity);
         //setContentView(R.layout.create_trip_activity);
+        binding.setStrBeginDate("Date de début");
+        binding.setStrEndDate("Date de fin");
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, CreateTripFragment.newInstance())

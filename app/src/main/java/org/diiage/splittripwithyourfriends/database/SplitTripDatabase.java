@@ -24,7 +24,8 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             synchronized (SplitTripDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SplitTripDatabase.class, "SplitTrip_database").addCallback(sTripDatabaseCallBack)
+                            SplitTripDatabase.class, "SplitTrip_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
