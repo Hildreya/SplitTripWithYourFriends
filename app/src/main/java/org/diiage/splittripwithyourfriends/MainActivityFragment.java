@@ -1,8 +1,12 @@
 package org.diiage.splittripwithyourfriends;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.diiage.splittripwithyourfriends.adapters.TripAdapter;
 import org.diiage.splittripwithyourfriends.databinding.FragmentMainBinding;
+import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.ui.createtrip.CreateTripViewModel;
 import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
 import java.util.ArrayList;
@@ -24,61 +31,35 @@ import java.util.List;
  */
 public class MainActivityFragment extends Fragment {
 
-    private static class TripViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTripName;
-        TextView txtNbParticipants;
-
-        private TripViewHolder(View itemView) {
-            super(itemView);
-            txtTripName = itemView.findViewById(R.id.txtTripName);
-            txtNbParticipants = itemView.findViewById(R.id.txtTripNbParticipants);
-        }
-    }
-
     RecyclerView recyclerView;
     MainFragmentViewModel mainFragmentViewModel;
+    TripAdapter tripAdapter;
+    List<Trip> trips = new ArrayList<>();
 
-    public MainActivityFragment() {
-        mainFragmentViewModel = new MainFragmentViewModel();
+    public MainActivityFragment(){
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        FragmentMainBinding binding = DataBindingUtil.setContentView(this.getActivity(), R.layout.fragment_main);
+        FragmentMainBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
         binding.setStrHelloWorld("Test binding");
+        mainFragmentViewModel = ViewModelProviders.of(this).get(MainFragmentViewModel.class);
 
-        recyclerView = view.findViewById(R.id.tripList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        recyclerView.setAdapter(new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View v = inflater.inflate(R.layout.trip_item, parent, false);
-                return new TripViewHolder(v);
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                List<Pair<String, String>> trip = mainFragmentViewModel.getTripList();
-                if (holder instanceof TripViewHolder) {
-                    ((TripViewHolder) holder).txtNbParticipants.setText(trip);
-                    ((TripViewHolder) holder).txtTripName.setText(trip);
-                }
-            }
-
-            @Override
-            public int getItemCount() {
-                return strings.size();
-            }
+        mainFragmentViewModel.getmAllTrips().observe(this, trips -> {
+            tripAdapter.setTrips(trips);
         });
+        recyclerView = binding.getRoot().findViewById(R.id.tripList);
 
-        return view;
+        return binding.getRoot();
     }
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        this.tripAdapter = new TripAdapter(this.getActivity(), new ArrayList<>());
+        recyclerView.setAdapter(this.tripAdapter);
+    }
 }
