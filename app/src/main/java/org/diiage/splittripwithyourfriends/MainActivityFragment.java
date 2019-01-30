@@ -7,14 +7,17 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.databinding.FragmentMainBinding;
+import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,7 +28,7 @@ public class MainActivityFragment extends Fragment {
         TextView txtTripName;
         TextView txtNbParticipants;
 
-        public TripViewHolder(View itemView) {
+        private TripViewHolder(View itemView) {
             super(itemView);
             txtTripName = itemView.findViewById(R.id.txtTripName);
             txtNbParticipants = itemView.findViewById(R.id.txtTripNbParticipants);
@@ -33,11 +36,10 @@ public class MainActivityFragment extends Fragment {
     }
 
     RecyclerView recyclerView;
-    ArrayList<String> strings = new ArrayList<>();
+    MainFragmentViewModel mainFragmentViewModel;
 
     public MainActivityFragment() {
-        strings.add("Test1");
-        strings.add("Test2");
+        mainFragmentViewModel = new MainFragmentViewModel();
     }
 
     @Override
@@ -62,7 +64,7 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                String trip = strings.get(position);
+                List<Pair<String, String>> trip = mainFragmentViewModel.getTripList();
                 if (holder instanceof TripViewHolder) {
                     ((TripViewHolder) holder).txtNbParticipants.setText(trip);
                     ((TripViewHolder) holder).txtTripName.setText(trip);
