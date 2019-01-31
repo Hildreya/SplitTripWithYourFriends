@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.R;
+import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Converters;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,11 +26,13 @@ public class TripAdapter extends RecyclerView.Adapter {
     public static class TripViewHolder extends RecyclerView.ViewHolder {
         public final View view;
         public final TextView txtTripName;
+        public final TextView txtTripStatutName;
 
         public TripViewHolder(View itemView) {
             super(itemView);
             this.view = itemView;
-            txtTripName = itemView.findViewById(R.id.txtTripName);
+            this.txtTripName = itemView.findViewById(R.id.txtTripName);
+            this.txtTripStatutName = itemView.findViewById(R.id.txtTripStatutName);
         }
     }
 
@@ -45,6 +49,7 @@ public class TripAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TripViewHolder) {
             ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).getName());
+            ((TripViewHolder) holder).txtTripStatutName.setText(this.lstTrips.get(position).getName());
         }
     }
 

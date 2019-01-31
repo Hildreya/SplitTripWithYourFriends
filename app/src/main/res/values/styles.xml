@@ -25,4 +25,11 @@
         <item name="android:layout_margin">8dp</item>
     </style>
 
+    <style name="trip_statut">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
 </resources>

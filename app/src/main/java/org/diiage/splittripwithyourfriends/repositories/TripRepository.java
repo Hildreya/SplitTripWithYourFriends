@@ -41,7 +41,7 @@ public class TripRepository {
 
         @Override
         protected Void doInBackground(final Trip ... params) {
-            mAsyncTaskDao.insertTrip(params[0]);
+            mAsyncTaskDao.insert(params[0]);
             return null;
         }
     }

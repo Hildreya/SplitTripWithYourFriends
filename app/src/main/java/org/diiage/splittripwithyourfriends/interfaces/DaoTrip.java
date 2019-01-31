@@ -17,13 +17,19 @@ import java.util.List;
 @Dao
 public interface DaoTrip {
     @Insert (onConflict = OnConflictStrategy.FAIL)
-    void insertTrip(Trip trip);
+    void insert(Trip trip);
 
-    @Update
-    void updateTrip(Trip trip);
+    @Insert(onConflict = OnConflictStrategy.FAIL)
+    void insert(Trip... trips);
+
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    void update(Trip trip);
 
     @Delete
-    void deleteTrip(Trip trip);
+    void delete(Trip trip);
+
+    @Query("DELETE FROM trips")
+    void deleteAll();
 
     @Query("SELECT * FROM Trips")
     LiveData<List<Trip>> getAllTrips();

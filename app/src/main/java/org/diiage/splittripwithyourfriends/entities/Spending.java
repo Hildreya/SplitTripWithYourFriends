@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity(tableName = "Spendings", foreignKeys = {
-        @ForeignKey(entity = Trip.class, parentColumns = "id", childColumns = "tripId"),
+        @ForeignKey(entity = Trip.class, parentColumns = "tid", childColumns = "tripId"),
         @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "payerId")
 })
 public class Spending {

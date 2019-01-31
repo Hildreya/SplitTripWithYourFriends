@@ -9,16 +9,16 @@ package org.diiage.splittripwithyourfriends.database;
         import android.os.AsyncTask;
         import android.support.annotation.NonNull;
 
+        import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
         import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
         import org.diiage.splittripwithyourfriends.entities.*;
 
-        import java.util.Date;
-
-@Database(entities = {Trip.class, /*Statut.class,*/ Participant.class, TripParticipantJoin.class,
+@Database(entities = {Trip.class, Statut.class, Participant.class, TripParticipantJoin.class,
         Participation.class,Spending.class,Payment.class, Refund.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoAccess();
+    public abstract DaoStatut daoStatut();
 
     private static volatile SplitTripDatabase INSTANCE;
 
@@ -49,17 +49,23 @@ public abstract class SplitTripDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final DaoTrip mDao;
+        private final DaoStatut sDao;
 
         PopulateDbAsync(SplitTripDatabase db) {
             mDao = db.daoAccess();
+            sDao= db.daoStatut();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
-            Trip t = new Trip("Romane Trip");
-            mDao.insertTrip(t);
-            t = new Trip("Vacances été");
-            mDao.insertTrip(t);
+            Statut statutV = new Statut("VALIDE");
+            Statut statutC = new Statut("CLOS");
+            Statut statutA = new Statut("ANNULE");
+            Trip tR = new Trip("Romane Trip",(int) sDao.insert(statutV));
+            Trip tM = new Trip("Matthew Trip",(int) sDao.insert(statutV));
+            Trip tS = new Trip("Summer Trip",(int) sDao.insert(statutC));
+            Trip tE = new Trip("English Trip",(int) sDao.insert(statutA));
+            mDao.insert(tR,tM,tS,tE);
             return null;
         }
     }

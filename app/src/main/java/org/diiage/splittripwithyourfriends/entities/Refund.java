@@ -6,7 +6,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "Refunds", foreignKeys = {
-        @ForeignKey(entity = Trip.class, parentColumns = "id", childColumns = "tripId"),
+        @ForeignKey(entity = Trip.class, parentColumns = "tid", childColumns = "tripId"),
         @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "emetteurId"),
         @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "receveurId")
 })

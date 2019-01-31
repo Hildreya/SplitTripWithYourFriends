@@ -66,7 +66,8 @@ public class CreateTripFragment extends Fragment implements View.OnClickListener
         String name = textView.getText().toString();
         String beginDate = textViewBeginDate.getText().toString();
         String endDate = textViewEndDate.getText().toString();
-        Trip t = new Trip(name);
+        Trip t = new Trip(name, 1);
+        //TODO récupération du statut
         mViewModel.insert(t);
         //mViewModel.AddTrip(name);
     }

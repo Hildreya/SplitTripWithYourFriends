@@ -7,7 +7,7 @@ import android.arch.persistence.room.ForeignKey;
         primaryKeys = { "tripId", "participantId" },
         foreignKeys = {
                 @ForeignKey(entity = Trip.class,
-                        parentColumns = "id",
+                        parentColumns = "tid",
                         childColumns = "tripId"),
                 @ForeignKey(entity = Participant.class,
                         parentColumns = "id",
