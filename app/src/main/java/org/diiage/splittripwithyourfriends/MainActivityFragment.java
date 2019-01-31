@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
@@ -45,7 +46,7 @@ public class MainActivityFragment extends Fragment {
         mainFragmentViewModel = ViewModelProviders.of(this).get(MainFragmentViewModel.class);
 
         recyclerView = binding.getRoot().findViewById(R.id.tripList);
-
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         return binding.getRoot();
     }
 
@@ -60,7 +61,6 @@ public class MainActivityFragment extends Fragment {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-
         recyclerView.setAdapter(this.tripAdapter);
 
     }
