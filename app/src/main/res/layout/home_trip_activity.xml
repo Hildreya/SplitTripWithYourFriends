@@ -8,22 +8,22 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivityFragment"
-        tools:showIn="@layout/activity_main">
+        tools:context=".HomeTripActivity">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/tripList"
-            android:layout_width="400dp"
-            android:layout_height="630dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="showAddMenu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:srcCompat="@android:drawable/arrow_up_float" />
     </android.support.constraint.ConstraintLayout>
 </layout>
