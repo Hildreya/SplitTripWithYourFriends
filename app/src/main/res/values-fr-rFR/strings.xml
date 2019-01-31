@@ -5,4 +5,9 @@
     <string name="action_add_participant">Ajouter un participant</string>
     <string name="action_create">Créer</string>
     <string name="participant_name">Nom du participant</string>
+    <string name="emptyDate">01/01/2000</string>
+    <string name="emptyName">Nom</string>
+    <string name="addTripLebelle">Ajouter un séjour</string>
+    <string name="start_date">Date de début</string>
+    <string name="end_date">Date de fin</string>
 </resources>

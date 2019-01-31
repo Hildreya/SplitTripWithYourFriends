@@ -4,6 +4,7 @@ package org.diiage.splittripwithyourfriends.database;
         import android.arch.persistence.room.Database;
         import android.arch.persistence.room.Room;
         import android.arch.persistence.room.RoomDatabase;
+        import android.arch.persistence.room.TypeConverters;
         import android.content.Context;
         import android.os.AsyncTask;
         import android.support.annotation.NonNull;
@@ -11,8 +12,11 @@ package org.diiage.splittripwithyourfriends.database;
         import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
         import org.diiage.splittripwithyourfriends.entities.*;
 
+        import java.util.Date;
+
 @Database(entities = {Trip.class, /*Statut.class,*/ Participant.class, TripParticipantJoin.class,
         Participation.class,Spending.class,Payment.class, Refund.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoAccess();
 
