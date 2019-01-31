@@ -11,7 +11,7 @@ package org.diiage.splittripwithyourfriends.database;
         import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
         import org.diiage.splittripwithyourfriends.entities.*;
 
-@Database(entities = {Trip.class, Statut.class, Participant.class, TripParticipantJoin.class,
+@Database(entities = {Trip.class, /*Statut.class,*/ Participant.class, TripParticipantJoin.class,
         Participation.class,Spending.class,Payment.class, Refund.class}, version = 1)
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoAccess();
@@ -24,7 +24,7 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             synchronized (SplitTripDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SplitTripDatabase.class, "SplitTrip_database")
+                            SplitTripDatabase.class, "SplitTrip_database").addCallback(sTripDatabaseCallBack)
                             .fallbackToDestructiveMigration()
                             .build();
                 }

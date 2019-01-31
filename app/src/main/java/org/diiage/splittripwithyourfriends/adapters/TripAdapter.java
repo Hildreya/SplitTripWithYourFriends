@@ -12,50 +12,49 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TripAdapter extends RecyclerView.Adapter {
 
-    private static class TripViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTripName;
-        //TextView txtNbParticipants;
+    public static class TripViewHolder extends RecyclerView.ViewHolder {
+        public final View view;
+        public final TextView txtTripName;
 
-
-        private TripViewHolder(View itemView) {
+        public TripViewHolder(View itemView) {
             super(itemView);
+            this.view = itemView;
             txtTripName = itemView.findViewById(R.id.txtTripName);
-            //txtNbParticipants = itemView.findViewById(R.id.txtTripNbParticipants);
         }
     }
 
-    private Context context;
     private List<Trip> lstTrips;
-
-    public TripAdapter(Context context, List<Trip> lstTrips) {
-        this.context = context.getApplicationContext();
-        this.lstTrips = lstTrips;
-    }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.trip_item, parent, false);
+        View v = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_item, parent, false);
         return new TripViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TripViewHolder) {
-            ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).toString());
+            ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).getName());
         }
     }
 
     @Override
     public int getItemCount() {
-        return this.lstTrips.size();
+        if(lstTrips != null) {
+            return this.lstTrips.size();
+        } else {
+            return 0;
+        }
     }
 
     public void setTrips(List<Trip> lstTrips) {
         this.lstTrips = lstTrips;
+        notifyDataSetChanged();
     }
 }

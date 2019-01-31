@@ -2,6 +2,7 @@ package org.diiage.splittripwithyourfriends.repositories;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.os.AsyncTask;
 
@@ -9,6 +10,7 @@ import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Trip;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TripRepository {
