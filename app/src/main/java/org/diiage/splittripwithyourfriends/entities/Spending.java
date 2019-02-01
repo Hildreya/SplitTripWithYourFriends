@@ -3,6 +3,7 @@ package org.diiage.splittripwithyourfriends.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
@@ -10,11 +11,12 @@ import java.util.Date;
 
 @Entity(tableName = "Spendings", foreignKeys = {
         @ForeignKey(entity = Trip.class, parentColumns = "tid", childColumns = "tripId"),
-        @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "payerId")
-})
+        @ForeignKey(entity = Participant.class, parentColumns = "pid", childColumns = "payerId"),},
+        indices = {@Index("payerId"), @Index("tripId")})
 public class Spending {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    @ColumnInfo(name = "spid")
+    private long id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -29,13 +31,13 @@ public class Spending {
     private String photo;
 
     @ColumnInfo(name = "payerId")
-    private int payerId;
+    private long payerId;
 
     @ColumnInfo(name = "tripId")
-    private int tripId;
+    private long tripId;
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -71,23 +73,23 @@ public class Spending {
         this.photo = photo;
     }
 
-    public int getPayerId() {
+    public long getPayerId() {
         return payerId;
     }
 
-    public void setPayerId(int payerId) {
+    public void setPayerId(long payerId) {
         this.payerId = payerId;
     }
 
-    public int getTripId() {
+    public long getTripId() {
         return tripId;
     }
 
-    public void setTripId(int tripId) {
+    public void setTripId(long tripId) {
         this.tripId = tripId;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

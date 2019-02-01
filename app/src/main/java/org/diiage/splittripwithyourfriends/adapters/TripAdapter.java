@@ -49,7 +49,9 @@ public class TripAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TripViewHolder) {
             ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).getName());
-            ((TripViewHolder) holder).txtTripStatutName.setText(this.lstTrips.get(position).getName());
+            long i = this.lstTrips.get(position).getStatutId();
+            String s = "Statut : "+i;
+            ((TripViewHolder) holder).txtTripStatutName.setText(s);
         }
     }
 

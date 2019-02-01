@@ -26,7 +26,7 @@ public interface DaoStatut {
     void insert(Statut... statuts);
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    void update(Statut director);
+    void update(Statut statut);
 
     @Query("DELETE FROM statuts")
     void deleteAll();

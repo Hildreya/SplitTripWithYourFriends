@@ -7,7 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "Participants")
 public class Participant {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    @ColumnInfo(name = "pid")
+    private long id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -17,7 +18,7 @@ public class Participant {
         return name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -25,7 +26,7 @@ public class Participant {
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

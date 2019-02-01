@@ -14,7 +14,7 @@ package org.diiage.splittripwithyourfriends.database;
         import org.diiage.splittripwithyourfriends.entities.*;
 
 @Database(entities = {Trip.class, Statut.class, Participant.class, TripParticipantJoin.class,
-        Participation.class,Spending.class,Payment.class, Refund.class}, version = 1)
+        Participation.class,Spending.class,Payment.class, Refund.class}, version = 3)
 @TypeConverters({Converters.class})
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoAccess();
@@ -62,8 +62,9 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             Statut statutC = new Statut("CLOS");
             Statut statutA = new Statut("ANNULE");
             Trip tR = new Trip("Romane Trip",(int) sDao.insert(statutV));
-            Trip tM = new Trip("Matthew Trip",(int) sDao.insert(statutV));
-            Trip tS = new Trip("Summer Trip",(int) sDao.insert(statutC));
+            int idOne =(int) sDao.insert(statutC);
+            Trip tM = new Trip("Matthew Trip",idOne);
+            Trip tS = new Trip("Summer Trip",idOne);
             Trip tE = new Trip("English Trip",(int) sDao.insert(statutA));
             mDao.insert(tR,tM,tS,tE);
             return null;
