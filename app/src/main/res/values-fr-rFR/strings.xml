@@ -10,4 +10,6 @@
     <string name="addTripLebelle">Ajouter un séjour</string>
     <string name="start_date">Date de début</string>
     <string name="end_date">Date de fin</string>
+    <string name="empty_not_saved">L\'entrée n\'est pas ajoutée car elle est vide.</string>
+    <string name="start_date_after_end_date">La date de début est après la date de fin.</string>
 </resources>
