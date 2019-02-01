@@ -13,15 +13,17 @@ package org.diiage.splittripwithyourfriends.database;
         import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
         import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
         import org.diiage.splittripwithyourfriends.entities.*;
+        import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
         import org.diiage.splittripwithyourfriends.repositories.TripRepository;
 
 @Database(entities = {Trip.class, Statut.class, Participant.class, TripParticipantJoin.class,
-        Participation.class,Spending.class,Payment.class, Refund.class}, version = 4)
+        Participation.class,Spending.class,Payment.class, Refund.class}, version = 5)
 @TypeConverters({Converters.class})
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoTrip();
     public abstract DaoStatut daoStatut();
     public abstract DaoParticipant daoParticipant();
+    public abstract DaoTripParticipation daoTripParticipant();
 
     private static volatile SplitTripDatabase INSTANCE;
 
@@ -31,7 +33,8 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             synchronized (SplitTripDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SplitTripDatabase.class, "SplitTrip_database").addCallback(sTripDatabaseCallBack)
+                            SplitTripDatabase.class, "SplitTrip_database")
+                            .addCallback(sTripDatabaseCallBack)
                             .fallbackToDestructiveMigration()
                             .build();
                 }
@@ -54,18 +57,22 @@ public abstract class SplitTripDatabase extends RoomDatabase {
         private final DaoTrip tDao;
         private final DaoStatut sDao;
         private final DaoParticipant pDao;
+        private final DaoTripParticipation tpDao;
 
         PopulateDbAsync(SplitTripDatabase db) {
             tDao = db.daoTrip();
             sDao= db.daoStatut();
             pDao = db.daoParticipant();
+            tpDao = db.daoTripParticipant();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
+            tpDao.deleteAll();
             tDao.deleteAll();
             sDao.deleteAll();
             pDao.deleteAll();
+
             Statut statutV = new Statut("VALIDE");
             Statut statutC = new Statut("CLOS");
             Statut statutA = new Statut("ANNULE");
@@ -109,7 +116,10 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             TripParticipantJoin tpM4 = new TripParticipantJoin(tidTwo, pidFour);
             TripParticipantJoin tpM5 = new TripParticipantJoin(tidTwo, pidFive);
 
-            TripParticipantJoin tpS1 = new TripParticipantJoin(tidTwo, pidThree);
+            TripParticipantJoin tpS1 = new TripParticipantJoin(tidThree, pidThree);
+
+            tpDao.insert(tpR1,tpR2,tpR3,tpM1,tpM2,tpM3,tpM4,tpM5,tpS1);
+
             return null;
         }
     }

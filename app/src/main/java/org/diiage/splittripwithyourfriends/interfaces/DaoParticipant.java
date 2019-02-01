@@ -31,9 +31,9 @@ public interface DaoParticipant {
     @Query("DELETE FROM participants")
     void deleteAll();
 
-    @Query("SELECT * FROM participants ORDER BY name ASC")
+    @Query("SELECT * FROM participants")
     LiveData<List<Participant>> getAllParticipants();
 
-    @Query("SELECT * FROM participants join tripparticipant on tripId where tripId=:idTrip ORDER BY name ASC")
+    @Query("SELECT * FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId= :idTrip")
     LiveData<List<Participant>> getAllParticipants(long idTrip);
 }

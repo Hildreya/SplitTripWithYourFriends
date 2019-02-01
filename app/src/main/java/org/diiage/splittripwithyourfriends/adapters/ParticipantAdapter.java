@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Participant;
+import org.diiage.splittripwithyourfriends.entities.TripParticipantJoin;
 
 import java.util.List;
 
@@ -45,7 +46,13 @@ public class ParticipantAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ParticipantViewHolder) {
-            ((ParticipantViewHolder) holder).txtParticipantName.setText(this.lstParticipants.get(position).getName());
+            if ( this.lstParticipants.size()==0){
+                ((ParticipantViewHolder) holder).txtParticipantName.setText("Aucun participant ");
+            }
+            else{
+                ((ParticipantViewHolder) holder).txtParticipantName.setText(this.lstParticipants.get(position).getName());
+            }
+
 
             String participantName= this.lstParticipants.get(position).getName();
             long participantId= this.lstParticipants.get(position).getId();
@@ -54,7 +61,7 @@ public class ParticipantAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), HomeTripActivity.class);
                     Bundle b = new Bundle();
-                    b.putString("ParamParticipantName", participantName);
+                    //b.putString("ParamParticipantName", participantName);
                     b.putLong("ParamParticipantId", participantId);
                     intent.putExtras(b);
                     v.getContext().startActivity(intent);

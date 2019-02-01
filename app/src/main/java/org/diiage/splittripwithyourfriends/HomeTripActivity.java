@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,15 +22,15 @@ public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnM
         HomeTripActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.home_trip_activity);
         if (savedInstanceState == null) {
             Bundle args = getIntent().getExtras();
-            final TextView tripNameED = this.findViewById(R.id.tvTrip_Name);
-            tripNameED.setText(args.getString("ParamTripName"));
             Bundle b = new Bundle();
             b.putLong("ParamTripId", args.getLong("ParamTripId"));
-            HomeTripFragment fragment = new HomeTripFragment();
+            b.putString("ParamTripName",args.getString("ParamTripName") );
+            Log.d("TripId", " Value :"+args.getLong("ParamTripId"));
+            HomeTripFragment fragment = HomeTripFragment.newInstance();
             fragment.setArguments(b);
-            /*getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, HomeTripFragment.newInstance())
-                    .commitNow();*/
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commitNow();
         }
     }
 

@@ -28,7 +28,7 @@ public interface DaoTrip {
     @Delete
     void delete(Trip trip);
 
-    @Query("DELETE FROM trips")
+    @Query("DELETE FROM Trips")
     void deleteAll();
 
     @Query("SELECT * FROM Trips")

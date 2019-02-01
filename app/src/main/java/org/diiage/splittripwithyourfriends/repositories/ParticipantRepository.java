@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Participant;
+import org.diiage.splittripwithyourfriends.entities.TripParticipantJoin;
 import org.diiage.splittripwithyourfriends.interfaces.DaoParticipant;
 
 import java.util.List;

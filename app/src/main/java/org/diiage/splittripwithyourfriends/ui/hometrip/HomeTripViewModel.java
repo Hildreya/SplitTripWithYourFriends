@@ -7,6 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import org.diiage.splittripwithyourfriends.entities.Participant;
+import org.diiage.splittripwithyourfriends.entities.TripParticipantJoin;
 import org.diiage.splittripwithyourfriends.repositories.ParticipantRepository;
 
 import java.util.List;
