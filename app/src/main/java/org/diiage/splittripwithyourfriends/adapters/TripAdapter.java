@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
-import org.diiage.splittripwithyourfriends.MainActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
-import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
 
 import java.util.List;
 

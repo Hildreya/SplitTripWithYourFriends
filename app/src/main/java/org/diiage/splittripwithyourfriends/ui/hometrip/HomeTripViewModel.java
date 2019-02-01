@@ -1,20 +1,24 @@
 package org.diiage.splittripwithyourfriends.ui.hometrip;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-public class HomeTripViewModel extends ViewModel {
-    private MutableLiveData<String> tripName;
+import org.diiage.splittripwithyourfriends.entities.Participant;
+import org.diiage.splittripwithyourfriends.repositories.ParticipantRepository;
 
-    public LiveData<String> getTripName() {
-        if(this.tripName == null) {
-            this.tripName = new MutableLiveData<String>();
-        }
-        return this.tripName;
+import java.util.List;
+
+public class HomeTripViewModel extends AndroidViewModel {
+    private ParticipantRepository participantRepository;
+
+    public HomeTripViewModel(Application application) {
+        super(application);
+        participantRepository = new ParticipantRepository(application);
     }
 
-    private void loadTripName() {
-        // Do an asynchronous operation to fetch trip
-    }
+    public LiveData<List<Participant>> getAllParticipants() { return participantRepository.getAllParticipants(); }
+    public LiveData<List<Participant>> getAllParticipants(long id) { return participantRepository.getAllParticipants(id); }
 }

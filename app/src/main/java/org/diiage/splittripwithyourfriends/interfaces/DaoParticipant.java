@@ -8,7 +8,6 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import org.diiage.splittripwithyourfriends.entities.Participant;
-import org.diiage.splittripwithyourfriends.entities.Statut;
 
 import java.util.List;
 
@@ -34,4 +33,7 @@ public interface DaoParticipant {
 
     @Query("SELECT * FROM participants ORDER BY name ASC")
     LiveData<List<Participant>> getAllParticipants();
+
+    @Query("SELECT * FROM participants join tripparticipant on tripId where tripId=:idTrip ORDER BY name ASC")
+    LiveData<List<Participant>> getAllParticipants(long idTrip);
 }

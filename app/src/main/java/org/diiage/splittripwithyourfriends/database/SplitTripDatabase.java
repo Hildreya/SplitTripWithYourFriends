@@ -63,6 +63,9 @@ public abstract class SplitTripDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
+            tDao.deleteAll();
+            sDao.deleteAll();
+            pDao.deleteAll();
             Statut statutV = new Statut("VALIDE");
             Statut statutC = new Statut("CLOS");
             Statut statutA = new Statut("ANNULE");

@@ -23,9 +23,13 @@ public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnM
             Bundle args = getIntent().getExtras();
             final TextView tripNameED = this.findViewById(R.id.tvTrip_Name);
             tripNameED.setText(args.getString("ParamTripName"));
-            getSupportFragmentManager().beginTransaction()
+            Bundle b = new Bundle();
+            b.putLong("ParamTripId", args.getLong("ParamTripId"));
+            HomeTripFragment fragment = new HomeTripFragment();
+            fragment.setArguments(b);
+            /*getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, HomeTripFragment.newInstance())
-                    .commitNow();
+                    .commitNow();*/
         }
     }
 

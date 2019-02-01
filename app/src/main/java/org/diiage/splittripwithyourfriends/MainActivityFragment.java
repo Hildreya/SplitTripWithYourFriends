@@ -62,6 +62,5 @@ public class MainActivityFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(this.tripAdapter);
-
     }
 }
