@@ -11,5 +11,11 @@
         android:id="@+id/hometrip"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.hometrip.HomeTripFragment"/>
+        tools:context=".ui.hometrip.HomeTripFragment">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/participantList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.constraint.ConstraintLayout>
 </layout>

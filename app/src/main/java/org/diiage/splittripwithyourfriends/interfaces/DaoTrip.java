@@ -17,7 +17,7 @@ import java.util.List;
 @Dao
 public interface DaoTrip {
     @Insert (onConflict = OnConflictStrategy.FAIL)
-    void insert(Trip trip);
+    long insert(Trip trip);
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
     void insert(Trip... trips);

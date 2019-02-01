@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.databinding.HomeTripActivityBinding;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
@@ -18,6 +20,9 @@ public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnM
         super.onCreate(savedInstanceState);
         HomeTripActivityBinding binding = DataBindingUtil.setContentView(this,R.layout.home_trip_activity);
         if (savedInstanceState == null) {
+            Bundle args = getIntent().getExtras();
+            final TextView tripNameED = this.findViewById(R.id.tvTrip_Name);
+            tripNameED.setText(args.getString("ParamTripName"));
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, HomeTripFragment.newInstance())
                     .commitNow();

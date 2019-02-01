@@ -19,7 +19,7 @@ public class TripRepository {
 
     public TripRepository(Application application) {
         SplitTripDatabase db = SplitTripDatabase.getDatabase(application);
-        mTripDao= db.daoAccess();
+        mTripDao= db.daoTrip();
         mAllTrips= mTripDao.getAllTrips();
     }
 

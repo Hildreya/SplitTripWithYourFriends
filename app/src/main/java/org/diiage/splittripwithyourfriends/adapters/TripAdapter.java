@@ -1,7 +1,7 @@
 package org.diiage.splittripwithyourfriends.adapters;
 
-import android.arch.lifecycle.LiveData;
-import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,17 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.diiage.splittripwithyourfriends.HomeTripActivity;
+import org.diiage.splittripwithyourfriends.MainActivity;
 import org.diiage.splittripwithyourfriends.R;
-import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
-import org.diiage.splittripwithyourfriends.entities.Converters;
 import org.diiage.splittripwithyourfriends.entities.Trip;
-import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
+import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class TripAdapter extends RecyclerView.Adapter {
 
@@ -50,8 +46,22 @@ public class TripAdapter extends RecyclerView.Adapter {
         if (holder instanceof TripViewHolder) {
             ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).getName());
             long i = this.lstTrips.get(position).getStatutId();
-            String s = "Statut : "+i;
+            String s = "Statut : "+i ;
             ((TripViewHolder) holder).txtTripStatutName.setText(s);
+
+            String tripName= this.lstTrips.get(position).getName();
+            long tripId= this.lstTrips.get(position).getId();
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), HomeTripActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("ParamTripName", tripName); //Your id
+                    b.putLong("ParamTripId", tripId); //Your id
+                    intent.putExtras(b); //Put your id to your next Intent
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 

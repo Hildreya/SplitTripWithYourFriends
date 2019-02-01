@@ -1,5 +1,6 @@
 package org.diiage.splittripwithyourfriends.entities;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
@@ -16,19 +17,25 @@ import android.arch.persistence.room.Index;
         },
         indices = {@Index("tripId"), @Index("participantId")})
 public class TripParticipantJoin {
-        private long tripId;
-        private long participantId;
 
-        public TripParticipantJoin(long tripId, long participantId) {
-                this.tripId = tripId;
-                this.participantId = participantId;
-        }
+    @ColumnInfo(name="tripId")
+    private long tripId;
 
-        public long getTripId() {
-                return tripId;
-        }
+    @ColumnInfo(name = "participantId")
+    private long participantId;
 
-        public long getParticipantId() {
-                return participantId;
-        }
+    public long getTripId() {
+            return tripId;
+    }
+
+    public long getParticipantId() {
+            return participantId;
+    }
+
+    public TripParticipantJoin(long tripId, long participantId) {
+        this.tripId = tripId;
+        this.participantId = participantId;
+    }
+
+
 }
