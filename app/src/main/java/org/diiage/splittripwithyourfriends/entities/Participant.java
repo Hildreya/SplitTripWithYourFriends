@@ -2,10 +2,11 @@ package org.diiage.splittripwithyourfriends.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "Participants")
+@Entity(tableName = "Participants", indices = {@Index(value = "name", unique = true)})
 public class Participant {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "pid")

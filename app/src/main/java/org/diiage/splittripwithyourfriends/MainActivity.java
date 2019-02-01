@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_create_participant) {
+            Intent i = new Intent(this, CreateParticipantActivity.class);
+            startActivity(i);
+        }
 
         return super.onOptionsItemSelected(item);
     }

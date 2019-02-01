@@ -19,8 +19,8 @@ public interface DaoParticipant {
     @Query("SELECT * FROM participants WHERE name = :name LIMIT 1")
     Participant findParticipantByName(String name);
 
-    @Insert(onConflict = OnConflictStrategy.FAIL)
-    long insert(Participant articipant);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    long insert(Participant participant);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Participant... participants);
