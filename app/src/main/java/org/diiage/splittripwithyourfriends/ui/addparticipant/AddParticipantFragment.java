@@ -73,8 +73,6 @@ public class AddParticipantFragment extends Fragment implements SelectablePartic
     @Override
     public void onItemSelected(SelectableParticipant selectableParticipant) {
         selectedParticipants = adapter.getSelectedParticipants();
-        Snackbar.make(recyclerView,"Selected item is "+selectableParticipant.getName()+
-                ", Totally  selectem item count is "+selectedParticipants.size(),Snackbar.LENGTH_LONG).show();
     }
 
     @Override
