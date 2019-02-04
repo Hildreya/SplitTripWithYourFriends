@@ -12,4 +12,7 @@
     <string name="empty_not_saved">Entry not saved because it is empty.</string>
     <string name="start_date_after_end_date">The start date is after the end date.</string>
     <string name="create_participant">Create participant</string>
+    <string name="dialog_trip_title">Trip</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

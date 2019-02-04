@@ -26,13 +26,6 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, CreateTripActivity.class);
             startActivity(i);
         });
-
-        Button btn = (Button) findViewById(R.id.button2);
-
-        btn.setOnClickListener(view -> {
-            Intent i = new Intent(this, HomeTripActivity.class);
-            startActivity(i);
-        });
     }
 
     @Override

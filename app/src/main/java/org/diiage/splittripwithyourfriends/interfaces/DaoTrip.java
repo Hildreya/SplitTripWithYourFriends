@@ -22,6 +22,12 @@ public interface DaoTrip {
     @Insert(onConflict = OnConflictStrategy.FAIL)
     void insert(Trip... trips);
 
+    @Query("SELECT * FROM trips WHERE name = :title")
+    Trip findMovieByTitle(String title);
+
+    @Query("SELECT * FROM trips WHERE tid = :id")
+    Trip findMovieById(long id);
+
     @Update(onConflict = OnConflictStrategy.IGNORE)
     void update(Trip trip);
 

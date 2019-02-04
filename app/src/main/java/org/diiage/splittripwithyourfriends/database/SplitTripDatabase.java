@@ -17,7 +17,7 @@ package org.diiage.splittripwithyourfriends.database;
         import org.diiage.splittripwithyourfriends.repositories.TripRepository;
 
 @Database(entities = {Trip.class, Statut.class, Participant.class, TripParticipantJoin.class,
-        Participation.class,Spending.class,Payment.class, Refund.class}, version = 5)
+        Participation.class,Spending.class,Payment.class, Refund.class}, version = 7)
 @TypeConverters({Converters.class})
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoTrip();
@@ -35,6 +35,7 @@ public abstract class SplitTripDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             SplitTripDatabase.class, "SplitTrip_database")
                             .addCallback(sTripDatabaseCallBack)
+                            .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .build();
                 }

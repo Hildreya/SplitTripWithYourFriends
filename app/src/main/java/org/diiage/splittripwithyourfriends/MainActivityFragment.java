@@ -16,6 +16,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.adapters.TripAdapter;
@@ -47,6 +48,7 @@ public class MainActivityFragment extends Fragment {
 
         recyclerView = binding.getRoot().findViewById(R.id.tripList);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        
         return binding.getRoot();
     }
 

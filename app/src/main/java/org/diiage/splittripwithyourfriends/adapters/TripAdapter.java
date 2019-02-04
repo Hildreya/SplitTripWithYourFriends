@@ -1,19 +1,27 @@
 package org.diiage.splittripwithyourfriends.adapters;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
 
 import java.util.List;
+import java.util.MissingFormatArgumentException;
 
 public class TripAdapter extends RecyclerView.Adapter {
 
@@ -46,12 +54,25 @@ public class TripAdapter extends RecyclerView.Adapter {
             long i = this.lstTrips.get(position).getStatutId();
             String s = "Statut : "+i ;
             ((TripViewHolder) holder).txtTripStatutName.setText(s);
-
             String tripName= this.lstTrips.get(position).getName();
             long tripId= this.lstTrips.get(position).getId();
+
+            Button btnUpdate = holder.itemView.findViewById(R.id.btnUpdateTripDialog);
+            btnUpdate.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    //Show the dialog
+                    Context ctx = v.getContext();
+                    FragmentManager fm = ((AppCompatActivity)ctx).getFragmentManager();
+                    MainSaveDialogFragment dialogFragment;
+                    dialogFragment = MainSaveDialogFragment.newInstance(tripName, tripId);
+                    dialogFragment.show(fm, "dialog_trip_save");
+                }
+            });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //Go to HomeTripActivity with parameters
                     Intent intent = new Intent(v.getContext(), HomeTripActivity.class);
                     Bundle b = new Bundle();
                     b.putString("ParamTripName", tripName); //Your id
