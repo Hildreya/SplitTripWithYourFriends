@@ -28,6 +28,9 @@ public interface DaoTripParticipation {
     @Query("DELETE FROM tripparticipant")
     void deleteAll();
 
+    @Query("DELETE FROM tripparticipant WHERE tripId = :id")
+    void delete(long id);
+
     @Query("SELECT * FROM tripparticipant")
     LiveData<List<TripParticipantJoin>> getAllTripParticipants();
 }

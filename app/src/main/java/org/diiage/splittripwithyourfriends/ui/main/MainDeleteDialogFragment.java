@@ -7,8 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,16 +16,16 @@ import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Trip;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
-import org.diiage.splittripwithyourfriends.repositories.TripRepository;
+import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
 
-public class MainSaveDialogFragment extends DialogFragment {
+public class MainDeleteDialogFragment extends DialogFragment {
+
     private Context context;
     private String tripNameExtra;
     private long tripIdExtra;
 
-    public static MainSaveDialogFragment newInstance(final String tripName, long tripId){
-        MainSaveDialogFragment fragment = new MainSaveDialogFragment();
-
+    public static MainDeleteDialogFragment newInstance(final String tripName, long tripId){
+        MainDeleteDialogFragment fragment = new MainDeleteDialogFragment();
         Bundle args = new Bundle();
         args.putString("tripNameToUpdate", tripName);
         args.putLong("tripIdToUpdate", tripId);
@@ -37,23 +37,17 @@ public class MainSaveDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_trip, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_delete_trip, null);
         Bundle args = getArguments();
         tripNameExtra = args.getString("tripNameToUpdate");
         tripIdExtra = args.getLong("tripIdToUpdate");
 
-        final EditText tripEditText = view.findViewById(R.id.etTripName);
-        if (tripNameExtra != null) {
-            tripEditText.setText(tripNameExtra);
-            tripEditText.setSelection(tripNameExtra.length());
-        }
-
         alertDialogBuilder.setView(view)
                 .setTitle(getString(R.string.dialog_trip_title))
-                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        saveTrip(tripEditText.getText().toString());
+                        deleteTrip(tripNameExtra);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -66,21 +60,24 @@ public class MainSaveDialogFragment extends DialogFragment {
         return alertDialogBuilder.create();
     }
 
-    private void saveTrip(String tripName) {
+    public void deleteTrip(String tripName){
+        Log.d("Trip à supprimer : " ,tripName);
         if (TextUtils.isEmpty(tripName)) {
             return;
         }
         context = getActivity().getApplicationContext();
         SplitTripDatabase db = SplitTripDatabase.getDatabase(context);
         DaoTrip tripDao = db.daoTrip();
+        DaoTripParticipation tripParticipationdao = db.daoTripParticipant();
 
         if (tripNameExtra != null) {
-            // clicked on item row -> update
-            Trip tripToUpdate = tripDao.findMovieById(tripIdExtra);
-            if (tripToUpdate != null) {
-                if (!tripToUpdate.getName().equals(tripName)) {
-                    tripToUpdate.setName(tripName);
-                    tripDao.update(tripToUpdate);
+            // clicked on item row -> delete
+            Trip tripToDelete = tripDao.findMovieById(tripIdExtra);
+            if (tripToDelete != null) {
+                if (!tripToDelete.getName().equals(tripName)) {
+                    tripParticipationdao.delete(tripToDelete.getId());
+                    tripDao.delete(tripToDelete);
+                    
                 }
             }
         }

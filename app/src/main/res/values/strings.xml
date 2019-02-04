@@ -14,5 +14,6 @@
     <string name="create_participant">Create participant</string>
     <string name="dialog_trip_title">Trip</string>
     <string name="save">Save</string>
+    <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
 </resources>

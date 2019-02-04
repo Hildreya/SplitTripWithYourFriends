@@ -22,12 +22,10 @@
         android:id="@+id/btnDeleteTrip"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="21dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnUpdateTripDialog"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -45,12 +43,10 @@
         android:id="@+id/btnUpdateTripDialog"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="150dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/update"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteTrip"
-        app:layout_constraintStart_toEndOf="@+id/txtTripName"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

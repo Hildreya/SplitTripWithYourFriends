@@ -18,6 +18,7 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class TripAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_item, parent, false);
         return new TripViewHolder(v);
     }
 
@@ -67,6 +68,19 @@ public class TripAdapter extends RecyclerView.Adapter {
                     MainSaveDialogFragment dialogFragment;
                     dialogFragment = MainSaveDialogFragment.newInstance(tripName, tripId);
                     dialogFragment.show(fm, "dialog_trip_save");
+                }
+            });
+
+            Button btnDelete = holder.itemView.findViewById(R.id.btnDeleteTrip);
+            btnDelete.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    //Show the dialog
+                    Context ctx = v.getContext();
+                    FragmentManager fm = ((AppCompatActivity)ctx).getFragmentManager();
+                    MainDeleteDialogFragment dialogFragment;
+                    dialogFragment = MainDeleteDialogFragment.newInstance(tripName, tripId);
+                    dialogFragment.show(fm, "dialog_trip_delete");
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
