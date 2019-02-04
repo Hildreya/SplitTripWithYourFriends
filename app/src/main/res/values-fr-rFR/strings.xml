@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">SplitTrip avec vos amis</string>
     <string name="action_settings">Options</string>
-    <string name="action_add_participant">Ajouter un participant</string>
+    <string name="action_add_participant">Ajouter participant(s)</string>
     <string name="action_create">Créer</string>
     <string name="participant_name">Nom du participant</string>
     <string name="emptyDate">01/01/2000</string>

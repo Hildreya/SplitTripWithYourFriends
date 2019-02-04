@@ -12,30 +12,20 @@ import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
 
 import java.util.List;
 
-public class ParticipantRepository {
-    private DaoParticipant mParticipantDao;
+public class TripParticipantRepository {
     private DaoTripParticipation mTripParticipantDao;
 
-    public ParticipantRepository(Application application) {
+    public TripParticipantRepository(Application application) {
         SplitTripDatabase db = SplitTripDatabase.getDatabase(application);
-        mParticipantDao= db.daoParticipant();
         mTripParticipantDao = db.daoTripParticipant();
     }
 
-    public LiveData<List<Participant>> getAllParticipants(){
-        return mParticipantDao.getAllParticipants();
+    public LiveData<List<TripParticipantJoin>> getAllTripParticipants(){
+        return mTripParticipantDao.getAllTripParticipants();
     }
 
-    public LiveData<List<Participant>> getAllParticipants(long tripId){
-        return mParticipantDao.getAllParticipants(tripId);
-    }
-
-    public LiveData<List<Participant>> getUnregisteredParticipants(long tripId){
-        return mParticipantDao.getUnregisteredParticipants(tripId);
-    }
-
-    public void insert(Participant participant){
-        new insertAsyncTask(mParticipantDao).execute(participant);
+    public void insert(TripParticipantJoin tripParticipantJoin){
+        new insertAsyncTask(mTripParticipantDao).execute(tripParticipantJoin);
     }
 
     public void registerParticipant(long participantId, long tripId) {
@@ -43,16 +33,16 @@ public class ParticipantRepository {
         mTripParticipantDao.insert(tripParticipantJoin);
     }
 
-    private static class insertAsyncTask extends AsyncTask<Participant, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<TripParticipantJoin, Void, Void> {
 
-        private DaoParticipant mAsyncTaskDao;
+        private DaoTripParticipation mAsyncTaskDao;
 
-        insertAsyncTask(DaoParticipant dao) {
+        insertAsyncTask(DaoTripParticipation dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(final Participant ... params) {
+        protected Void doInBackground(final TripParticipantJoin ... params) {
             mAsyncTaskDao.insert(params[0]);
             return null;
         }

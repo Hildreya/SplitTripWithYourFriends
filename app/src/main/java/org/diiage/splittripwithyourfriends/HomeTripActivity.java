@@ -48,7 +48,12 @@ public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnM
         switch (item.getItemId()) {
             case R.id.action_add_participant:
                 // Go to add participant activity
+                Bundle args = getIntent().getExtras();
                 Intent i = new Intent(this, AddParticipantActivity.class);
+                Bundle b = new Bundle();
+                b.putLong("ParamTripId", args.getLong("ParamTripId"));
+                b.putString("ParamTripName",args.getString("ParamTripName") );
+                i.putExtras(b);
                 startActivity(i);
                 return true;
             default:
