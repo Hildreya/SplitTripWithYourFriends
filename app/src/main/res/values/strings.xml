@@ -4,6 +4,7 @@
     <string name="emptyDate">01/01/2000</string>
     <string name="emptyName">Name</string>
     <string name="action_add_participant">Add participant(s)</string>
+    <string name="action_create_spending">Create spending</string>
     <string name="action_create">Create</string>
     <string name="participant_name">Participant\'s name</string>
     <string name="addTripLebelle">Add a trip</string>
@@ -16,4 +17,7 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="spending_title">Spending title</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 </resources>

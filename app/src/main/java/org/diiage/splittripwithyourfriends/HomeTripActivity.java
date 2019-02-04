@@ -45,16 +45,21 @@ public class HomeTripActivity extends AppCompatActivity implements PopupMenu.OnM
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        Bundle args = getIntent().getExtras();
+        Bundle b = new Bundle();
+        b.putLong("ParamTripId", args.getLong("ParamTripId"));
+        b.putString("ParamTripName",args.getString("ParamTripName") );
         switch (item.getItemId()) {
             case R.id.action_add_participant:
                 // Go to add participant activity
-                Bundle args = getIntent().getExtras();
-                Intent i = new Intent(this, AddParticipantActivity.class);
-                Bundle b = new Bundle();
-                b.putLong("ParamTripId", args.getLong("ParamTripId"));
-                b.putString("ParamTripName",args.getString("ParamTripName") );
-                i.putExtras(b);
-                startActivity(i);
+                Intent iAddParticipant = new Intent(this, AddParticipantActivity.class);
+                iAddParticipant.putExtras(b);
+                startActivity(iAddParticipant);
+                return true;
+            case R.id.action_create_spending:
+                Intent iCreateParticipant = new Intent(this, CreateSpendingActivity.class);
+                iCreateParticipant.putExtras(b);
+                startActivity(iCreateParticipant);
                 return true;
             default:
                 return false;
