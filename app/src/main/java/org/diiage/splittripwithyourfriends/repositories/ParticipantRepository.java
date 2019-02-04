@@ -14,12 +14,10 @@ import java.util.List;
 
 public class ParticipantRepository {
     private DaoParticipant mParticipantDao;
-    private DaoTripParticipation mTripParticipantDao;
 
     public ParticipantRepository(Application application) {
         SplitTripDatabase db = SplitTripDatabase.getDatabase(application);
         mParticipantDao= db.daoParticipant();
-        mTripParticipantDao = db.daoTripParticipant();
     }
 
     public LiveData<List<Participant>> getAllParticipants(){
@@ -36,11 +34,6 @@ public class ParticipantRepository {
 
     public void insert(Participant participant){
         new insertAsyncTask(mParticipantDao).execute(participant);
-    }
-
-    public void registerParticipant(long participantId, long tripId) {
-        TripParticipantJoin tripParticipantJoin = new TripParticipantJoin(tripId,participantId);
-        mTripParticipantDao.insert(tripParticipantJoin);
     }
 
     private static class insertAsyncTask extends AsyncTask<Participant, Void, Void> {

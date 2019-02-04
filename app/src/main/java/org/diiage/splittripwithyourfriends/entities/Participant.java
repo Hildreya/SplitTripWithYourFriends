@@ -35,4 +35,9 @@ public class Participant {
     public Participant(@NonNull String name) {
         this.name = name;
     }
+
+    public Participant(@NonNull String name, long pid) {
+        this.name = name;
+        this.id = pid;
+    }
 }

@@ -31,8 +31,10 @@ public class AddParticipantViewModel extends AndroidViewModel {
         return participantRepository.getAllParticipants(id);
     }
 
-    public void registerParticipant(long participantId, long tripId) {
-        tripParticipantRepository.registerParticipant(participantId,tripId);
+    public void registerParticipants(List<Participant> participants, long tripId) {
+        for(Participant participant : participants) {
+            tripParticipantRepository.registerParticipant(participant.getId(),tripId);
+        }
     }
 }
 

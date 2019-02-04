@@ -107,5 +107,6 @@ public class SelectableParticipantAdapter extends RecyclerView.Adapter implement
         for(Participant participant : participants) {
             mValues.add(new SelectableParticipant(participant, false));
         }
+        notifyDataSetChanged();
     }
 }

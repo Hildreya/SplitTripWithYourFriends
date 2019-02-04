@@ -9,7 +9,7 @@ public class SelectableParticipant extends Participant {
     private boolean isSelected = false;
 
     public SelectableParticipant(Participant participant, boolean isSelected) {
-        super(participant.getName());
+        super(participant.getName(), participant.getId());
         this.isSelected = isSelected();
     }
 

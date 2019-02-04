@@ -37,6 +37,6 @@ public interface DaoParticipant {
     @Query("SELECT * FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId= :idTrip")
     LiveData<List<Participant>> getAllParticipants(long idTrip);
 
-    @Query("SELECT Distinct * FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId NOT LIKE :idTrip")
+    @Query("SELECT pid, name FROM participants EXCEPT SELECT pid, name FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId= :idTrip")
     LiveData<List<Participant>> getUnregisteredParticipants(long idTrip);
 }

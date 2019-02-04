@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.adapters.SelectableParticipantAdapter;
@@ -59,13 +60,10 @@ public class AddParticipantFragment extends Fragment implements SelectablePartic
         super.onActivityCreated(savedInstanceState);
 
         this.adapter = new SelectableParticipantAdapter(this, true);
-        List<Participant> test = new ArrayList<>();
-        test.add(new Participant("test"));
-        test.add(new Participant("test2"));
-        this.adapter.setmParticipants(test);
-//        this.mViewModel.getmUnregisteredParticipants(this.tripId).observe(this, participants -> {
-//            adapter.setmParticipants(participants);
-//        });
+
+        this.mViewModel.getmUnregisteredParticipants(this.tripId).observe(this, participants -> {
+            adapter.setmParticipants(participants);
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(this.adapter);
@@ -82,10 +80,12 @@ public class AddParticipantFragment extends Fragment implements SelectablePartic
     @Override
     public void onClick(View v) {
         if(v == btnAddParticipant) {
-            for(Participant participant : selectedParticipants) {
-                mViewModel.registerParticipant(participant.getId(),tripId);
+            if(selectedParticipants != null) {
+                mViewModel.registerParticipants(selectedParticipants, tripId);
+                getActivity().finish();
+            } else {
+                Toast.makeText(this.getContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
             }
-
         }
 
     }

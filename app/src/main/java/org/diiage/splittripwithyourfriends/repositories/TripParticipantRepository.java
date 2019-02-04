@@ -30,7 +30,7 @@ public class TripParticipantRepository {
 
     public void registerParticipant(long participantId, long tripId) {
         TripParticipantJoin tripParticipantJoin = new TripParticipantJoin(tripId,participantId);
-        mTripParticipantDao.insert(tripParticipantJoin);
+        new insertAsyncTask(mTripParticipantDao).execute(tripParticipantJoin);
     }
 
     private static class insertAsyncTask extends AsyncTask<TripParticipantJoin, Void, Void> {
