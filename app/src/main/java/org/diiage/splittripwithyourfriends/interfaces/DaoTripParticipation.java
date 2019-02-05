@@ -2,6 +2,7 @@ package org.diiage.splittripwithyourfriends.interfaces;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -30,6 +31,9 @@ public interface DaoTripParticipation {
 
     @Query("DELETE FROM tripparticipant WHERE tripId = :id")
     void delete(long id);
+
+    @Delete
+    void delete(TripParticipantJoin tripParticipantJoin);
 
     @Query("SELECT * FROM tripparticipant")
     LiveData<List<TripParticipantJoin>> getAllTripParticipants();

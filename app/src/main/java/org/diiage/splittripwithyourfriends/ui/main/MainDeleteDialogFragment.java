@@ -2,6 +2,7 @@ package org.diiage.splittripwithyourfriends.ui.main;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,13 +11,15 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.entities.TripParticipantJoin;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
+
+import java.util.List;
 
 public class MainDeleteDialogFragment extends DialogFragment {
 
@@ -47,7 +50,7 @@ public class MainDeleteDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        deleteTrip(tripNameExtra);
+                        deleteTrip(MainDeleteDialogFragment.this, tripNameExtra);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -60,24 +63,23 @@ public class MainDeleteDialogFragment extends DialogFragment {
         return alertDialogBuilder.create();
     }
 
-    public void deleteTrip(String tripName){
+    public static void deleteTrip(MainDeleteDialogFragment mainDeleteDialogFragment, String tripName){
         Log.d("Trip à supprimer : " ,tripName);
         if (TextUtils.isEmpty(tripName)) {
             return;
         }
-        context = getActivity().getApplicationContext();
-        SplitTripDatabase db = SplitTripDatabase.getDatabase(context);
+        mainDeleteDialogFragment.context = mainDeleteDialogFragment.getActivity().getApplicationContext();
+        SplitTripDatabase db = SplitTripDatabase.getDatabase(mainDeleteDialogFragment.context);
         DaoTrip tripDao = db.daoTrip();
         DaoTripParticipation tripParticipationdao = db.daoTripParticipant();
 
-        if (tripNameExtra != null) {
+        if (mainDeleteDialogFragment.tripNameExtra != null) {
             // clicked on item row -> delete
-            Trip tripToDelete = tripDao.findMovieById(tripIdExtra);
+            Trip tripToDelete = tripDao.findMovieById(mainDeleteDialogFragment.tripIdExtra);
             if (tripToDelete != null) {
-                if (!tripToDelete.getName().equals(tripName)) {
+                if (tripToDelete.getName().equals(tripName)) {
                     tripParticipationdao.delete(tripToDelete.getId());
                     tripDao.delete(tripToDelete);
-                    
                 }
             }
         }
