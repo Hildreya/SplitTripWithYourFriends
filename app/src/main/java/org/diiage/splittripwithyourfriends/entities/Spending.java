@@ -22,7 +22,7 @@ public class Spending {
     private String name;
 
     @ColumnInfo(name = "total")
-    private String total;
+    private Double total;
 
     @ColumnInfo(name = "date")
     private Date date;
@@ -49,11 +49,11 @@ public class Spending {
         this.name = name;
     }
 
-    public String getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

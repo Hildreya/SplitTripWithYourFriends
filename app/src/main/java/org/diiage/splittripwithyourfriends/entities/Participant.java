@@ -40,4 +40,10 @@ public class Participant {
         this.name = name;
         this.id = pid;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

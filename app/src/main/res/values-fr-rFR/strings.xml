@@ -21,4 +21,6 @@
     <string name="spending_title">Titre dépense</string>
     <string name="from">De</string>
     <string name="to">Pour</string>
+    <string name="total_spending">Total dépense</string>
+    <string name="no_participant_selected">Sélectionnez au minimum un participant.</string>
 </resources>

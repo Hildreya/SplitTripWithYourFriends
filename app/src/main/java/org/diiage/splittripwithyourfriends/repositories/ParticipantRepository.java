@@ -32,6 +32,10 @@ public class ParticipantRepository {
         return mParticipantDao.getUnregisteredParticipants(tripId);
     }
 
+    public Participant getParticipantByName(String name){
+        return mParticipantDao.findParticipantByName(name);
+    }
+
     public void insert(Participant participant){
         new insertAsyncTask(mParticipantDao).execute(participant);
     }

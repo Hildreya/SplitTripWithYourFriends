@@ -10,6 +10,8 @@ package org.diiage.splittripwithyourfriends.database;
         import android.support.annotation.NonNull;
 
         import org.diiage.splittripwithyourfriends.interfaces.DaoParticipant;
+        import org.diiage.splittripwithyourfriends.interfaces.DaoParticipation;
+        import org.diiage.splittripwithyourfriends.interfaces.DaoSpending;
         import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
         import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
         import org.diiage.splittripwithyourfriends.entities.*;
@@ -24,6 +26,8 @@ public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoStatut daoStatut();
     public abstract DaoParticipant daoParticipant();
     public abstract DaoTripParticipation daoTripParticipant();
+    public abstract DaoSpending daoSpending();
+    public abstract DaoParticipation daoParticipation();
 
     private static volatile SplitTripDatabase INSTANCE;
 
