@@ -76,7 +76,7 @@ public class MainSaveDialogFragment extends DialogFragment {
 
         if (tripNameExtra != null) {
             // clicked on item row -> update
-            Trip tripToUpdate = tripDao.findMovieById(tripIdExtra);
+            Trip tripToUpdate = tripDao.findTripById(tripIdExtra);
             if (tripToUpdate != null) {
                 if (!tripToUpdate.getName().equals(tripName)) {
                     tripToUpdate.setName(tripName);

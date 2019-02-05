@@ -30,7 +30,10 @@ public interface DaoTripParticipation {
     void deleteAll();
 
     @Query("DELETE FROM tripparticipant WHERE tripId = :id")
-    void delete(long id);
+    void deleteWithTripId(long id);
+
+    @Query("DELETE FROM tripparticipant WHERE participantId = :id")
+    void deleteWithParticipantId(long id);
 
     @Delete
     void delete(TripParticipantJoin tripParticipantJoin);

@@ -2,7 +2,6 @@ package org.diiage.splittripwithyourfriends.ui.main;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,11 +14,8 @@ import android.view.View;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Trip;
-import org.diiage.splittripwithyourfriends.entities.TripParticipantJoin;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
-
-import java.util.List;
 
 public class MainDeleteDialogFragment extends DialogFragment {
 
@@ -75,10 +71,10 @@ public class MainDeleteDialogFragment extends DialogFragment {
 
         if (mainDeleteDialogFragment.tripNameExtra != null) {
             // clicked on item row -> delete
-            Trip tripToDelete = tripDao.findMovieById(mainDeleteDialogFragment.tripIdExtra);
+            Trip tripToDelete = tripDao.findTripById(mainDeleteDialogFragment.tripIdExtra);
             if (tripToDelete != null) {
                 if (tripToDelete.getName().equals(tripName)) {
-                    tripParticipationdao.delete(tripToDelete.getId());
+                    tripParticipationdao.deleteWithTripId(tripToDelete.getId());
                     tripDao.delete(tripToDelete);
                 }
             }
