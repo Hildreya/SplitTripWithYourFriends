@@ -2,6 +2,7 @@ package org.diiage.splittripwithyourfriends.interfaces;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -14,7 +15,7 @@ import java.util.List;
 @Dao
 public interface DaoParticipant {
     @Query("SELECT * FROM participants WHERE pid = :id LIMIT 1")
-    Participant findParticipantById(int id);
+    Participant findParticipantById(long id);
 
     @Query("SELECT * FROM participants WHERE name = :name LIMIT 1")
     Participant findParticipantByName(String name);
@@ -27,6 +28,9 @@ public interface DaoParticipant {
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     void update(Participant participant);
+
+    @Delete
+    void delete(Participant participant);
 
     @Query("DELETE FROM participants")
     void deleteAll();

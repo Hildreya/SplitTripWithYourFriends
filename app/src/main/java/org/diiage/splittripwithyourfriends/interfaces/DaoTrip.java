@@ -23,10 +23,10 @@ public interface DaoTrip {
     void insert(Trip... trips);
 
     @Query("SELECT * FROM trips WHERE name = :title")
-    Trip findMovieByTitle(String title);
+    Trip findTripByTitle(String title);
 
     @Query("SELECT * FROM trips WHERE tid = :id")
-    Trip findMovieById(long id);
+    Trip findTripById(long id);
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     void update(Trip trip);
