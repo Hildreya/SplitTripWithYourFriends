@@ -29,6 +29,11 @@ public class SpendingRepository {
         return mSpendingDao.getSpendingByTrip(tripId);
     }
 
+//    public LiveData<List<Spending>> getSpendingByParticipation(long participationId, long tripId){
+//        LiveData<List<Spending>> spendings = mSpendingDao.getSpendingByTrip(tripId);
+//        spendings.observe();
+//    }
+
     public long insertAndRetrieveId(Spending spending) {
         return mSpendingDao.insert(spending);
     }

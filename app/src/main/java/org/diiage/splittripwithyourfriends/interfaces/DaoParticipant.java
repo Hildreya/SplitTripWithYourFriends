@@ -17,6 +17,9 @@ public interface DaoParticipant {
     @Query("SELECT * FROM participants WHERE pid = :id LIMIT 1")
     Participant findParticipantById(long id);
 
+    @Query("SELECT * FROM participants WHERE pid = :id LIMIT 1")
+    LiveData<Participant> findParticipantByIdWithLiveData(long id);
+
     @Query("SELECT * FROM participants WHERE name = :name LIMIT 1")
     Participant findParticipantByName(String name);
 
@@ -40,6 +43,9 @@ public interface DaoParticipant {
 
     @Query("SELECT * FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId= :idTrip")
     LiveData<List<Participant>> getAllParticipants(long idTrip);
+
+    @Query("SELECT * FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId= :idTrip")
+    List<Participant> getAllParticipantsNoLiveData(long idTrip);
 
     @Query("SELECT pid, name FROM participants EXCEPT SELECT pid, name FROM participants inner join tripparticipant on participants.pid= tripparticipant.participantId where tripId= :idTrip")
     LiveData<List<Participant>> getUnregisteredParticipants(long idTrip);

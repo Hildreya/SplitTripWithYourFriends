@@ -28,12 +28,20 @@ public class ParticipantRepository {
         return mParticipantDao.getAllParticipants(tripId);
     }
 
+    public List<Participant> getAllParticipantsNoLiveData(long tripId) {
+        return mParticipantDao.getAllParticipantsNoLiveData(tripId);
+    }
+
     public LiveData<List<Participant>> getUnregisteredParticipants(long tripId){
         return mParticipantDao.getUnregisteredParticipants(tripId);
     }
 
     public Participant getParticipantByName(String name){
         return mParticipantDao.findParticipantByName(name);
+    }
+
+    public Participant getParticipant(long partcipantId) {
+        return mParticipantDao.findParticipantById(partcipantId);
     }
 
     public void insert(Participant participant){

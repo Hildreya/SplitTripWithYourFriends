@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,23 +24,26 @@ import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ParticipantAdapter extends RecyclerView.Adapter {
 
     public static class ParticipantViewHolder extends RecyclerView.ViewHolder {
         public final View view;
         public final TextView txtParticipantName;
+        public final TextView balance;
 
         public ParticipantViewHolder(View itemView) {
             super(itemView);
             this.view = itemView;
             this.txtParticipantName = itemView.findViewById(R.id.txtParticipantName);
+            this.balance = itemView.findViewById(R.id.balanceTextView);
         }
     }
-    private List<Participant> lstParticipants;
+    private List<Pair<Participant, Double>> lstParticipants;
 
-    public void setParticipantsList(List<Participant> movieList) {
-        this.lstParticipants = movieList;
+    public void setParticipantsList(List<Pair<Participant, Double>> participantsList) {
+        this.lstParticipants = participantsList;
         notifyDataSetChanged();
     }
 
@@ -57,11 +61,12 @@ public class ParticipantAdapter extends RecyclerView.Adapter {
                 ((ParticipantViewHolder) holder).txtParticipantName.setText("Aucun participant ");
             }
             else{
-                ((ParticipantViewHolder) holder).txtParticipantName.setText(this.lstParticipants.get(position).getName());
+                ((ParticipantViewHolder) holder).txtParticipantName.setText(this.lstParticipants.get(position).first.getName());
+                ((ParticipantViewHolder) holder).balance.setText(String.format(Locale.FRENCH,"%.2f",this.lstParticipants.get(position).second));
             }
 
-            String participantName= this.lstParticipants.get(position).getName();
-            long participantId= this.lstParticipants.get(position).getId();
+            String participantName= this.lstParticipants.get(position).first.getName();
+            long participantId= this.lstParticipants.get(position).first.getId();
 
             Button btnUpdate = holder.itemView.findViewById(R.id.btnUpdateParticipantDialog);
             btnUpdate.setOnClickListener(new View.OnClickListener(){
