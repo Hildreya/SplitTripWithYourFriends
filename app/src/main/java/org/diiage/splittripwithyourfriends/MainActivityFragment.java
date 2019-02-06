@@ -45,7 +45,6 @@ public class MainActivityFragment extends Fragment {
 
         FragmentMainBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
         mainFragmentViewModel = ViewModelProviders.of(this).get(MainFragmentViewModel.class);
-
         recyclerView = binding.getRoot().findViewById(R.id.tripList);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         
@@ -55,13 +54,10 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         this.tripAdapter = new TripAdapter();
-
         mainFragmentViewModel.getmAllTrips().observe(this, trips -> {
             tripAdapter.setTrips(trips);
         });
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(this.tripAdapter);
     }

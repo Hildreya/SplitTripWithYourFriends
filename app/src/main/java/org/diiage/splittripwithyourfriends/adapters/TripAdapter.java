@@ -18,6 +18,7 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
 

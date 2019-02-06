@@ -15,6 +15,8 @@
     <string name="start_date_after_end_date">The start date is after the end date.</string>
     <string name="create_participant">Create participant</string>
     <string name="dialog_trip_title">Trip</string>
+    <string name="title_participants">General overview</string>
+    <string name="title_spendings">Spendings</string>
     <string name="dialog_participant_title">Participant</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
