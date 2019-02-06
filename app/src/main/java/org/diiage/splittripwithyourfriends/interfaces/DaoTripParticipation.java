@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface DaoTripParticipation {
     @Query("SELECT * FROM tripparticipant WHERE participantId = :id LIMIT 1")
-    TripParticipantJoin findTripParticipantById(int id);
+    TripParticipantJoin findTripParticipantById(long id);
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
     long insert(TripParticipantJoin articipant);

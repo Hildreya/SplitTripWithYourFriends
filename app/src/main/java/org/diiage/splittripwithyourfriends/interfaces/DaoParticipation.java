@@ -14,6 +14,8 @@ import java.util.List;
 
 @Dao
 public interface DaoParticipation {
+    @Query("SELECT * FROM participations WHERE participantId = :id LIMIT 1")
+    Participation findParticipationById(long id);
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
     long insert(Participation participation);
@@ -26,6 +28,9 @@ public interface DaoParticipation {
 
     @Query("DELETE FROM participations")
     void deleteAll();
+
+    @Query("DELETE FROM participations WHERE spendingId = :id")
+    void deleteWithSpendingId(long id);
 
     @Query("SELECT * FROM participations")
     LiveData<List<Participation>> getAllParticipations();

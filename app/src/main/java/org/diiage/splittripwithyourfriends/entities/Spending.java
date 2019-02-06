@@ -92,4 +92,14 @@ public class Spending {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Spending(String libelle, Double montant, Date dateS, long payerId, long tripId) {
+        this.name = libelle;
+        this.total=montant;
+        this.date=dateS;
+        this.payerId=payerId;
+        this.tripId= tripId;
+    }
+
+    public Spending(){}
 }

@@ -15,11 +15,8 @@ import android.view.View;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.database.SplitTripDatabase;
 import org.diiage.splittripwithyourfriends.entities.Participant;
-import org.diiage.splittripwithyourfriends.entities.Trip;
 import org.diiage.splittripwithyourfriends.interfaces.DaoParticipant;
-import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
 import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
-import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 
 import java.util.List;
 

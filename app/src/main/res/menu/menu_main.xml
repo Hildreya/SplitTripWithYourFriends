@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.diiage.splittripwithyourfriends.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="1"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_create_participant"
         android:orderInCategory="100"
         android:title="@string/create_participant"

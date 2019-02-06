@@ -1,25 +1,24 @@
 package org.diiage.splittripwithyourfriends.database;
 
-        import android.arch.persistence.db.SupportSQLiteDatabase;
-        import android.arch.persistence.room.Database;
-        import android.arch.persistence.room.Room;
-        import android.arch.persistence.room.RoomDatabase;
-        import android.arch.persistence.room.TypeConverters;
-        import android.content.Context;
-        import android.os.AsyncTask;
-        import android.support.annotation.NonNull;
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
-        import org.diiage.splittripwithyourfriends.interfaces.DaoParticipant;
-        import org.diiage.splittripwithyourfriends.interfaces.DaoParticipation;
-        import org.diiage.splittripwithyourfriends.interfaces.DaoSpending;
-        import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
-        import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
-        import org.diiage.splittripwithyourfriends.entities.*;
-        import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
-        import org.diiage.splittripwithyourfriends.repositories.TripRepository;
+import org.diiage.splittripwithyourfriends.interfaces.DaoParticipant;
+import org.diiage.splittripwithyourfriends.interfaces.DaoParticipation;
+import org.diiage.splittripwithyourfriends.interfaces.DaoSpending;
+import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
+import org.diiage.splittripwithyourfriends.interfaces.DaoTrip;
+import org.diiage.splittripwithyourfriends.entities.*;
+import org.diiage.splittripwithyourfriends.interfaces.DaoTripParticipation;
 
 @Database(entities = {Trip.class, Statut.class, Participant.class, TripParticipantJoin.class,
-        Participation.class,Spending.class,Payment.class, Refund.class}, version = 7)
+        Participation.class,Spending.class,Payment.class, Refund.class}, version = 8)
 @TypeConverters({Converters.class})
 public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoTrip daoTrip();
@@ -63,20 +62,26 @@ public abstract class SplitTripDatabase extends RoomDatabase {
         private final DaoStatut sDao;
         private final DaoParticipant pDao;
         private final DaoTripParticipation tpDao;
+        private final DaoSpending spDao;
+        private final DaoParticipation partDao;
 
         PopulateDbAsync(SplitTripDatabase db) {
             tDao = db.daoTrip();
             sDao= db.daoStatut();
             pDao = db.daoParticipant();
             tpDao = db.daoTripParticipant();
+            spDao=db.daoSpending();
+            partDao=db.daoParticipation();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
             tpDao.deleteAll();
+            partDao.deleteAll();
             tDao.deleteAll();
             sDao.deleteAll();
             pDao.deleteAll();
+            spDao.deleteAll();
 
             Statut statutV = new Statut("VALIDE");
             Statut statutC = new Statut("CLOS");
@@ -124,6 +129,21 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             TripParticipantJoin tpS1 = new TripParticipantJoin(tidThree, pidThree);
 
             tpDao.insert(tpR1,tpR2,tpR3,tpM1,tpM2,tpM3,tpM4,tpM5,tpS1);
+
+            Spending s1 = new Spending("Courses",150.45,null,pidFive,tidOne);
+            Spending s2 = new Spending("Location",860.60,null,pidOne,tidOne);
+
+            //Récupération des id des participants insérés
+            int spidOne = (int) spDao.insert(s1);
+            int spidTwo=(int) spDao.insert(s2);
+
+            Participation part1 = new Participation(spidOne,pidOne);
+            Participation part2 = new Participation(spidOne,pidFive);
+            Participation part3 = new Participation(spidTwo,pidOne);
+            Participation part4 = new Participation(spidTwo,pidTwo);
+            Participation part5 = new Participation(spidTwo,pidFive);
+
+            partDao.insert(part1,part2,part3,part4,part5);
 
             return null;
         }
