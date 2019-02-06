@@ -2,6 +2,7 @@ package org.diiage.splittripwithyourfriends.ui.hometrip;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +21,15 @@ import android.widget.TextView;
 
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.adapters.ParticipantAdapter;
+import org.diiage.splittripwithyourfriends.business.CalculService;
 import org.diiage.splittripwithyourfriends.databinding.FragmentMainBinding;
 import org.diiage.splittripwithyourfriends.databinding.HomeTripFragmentBinding;
 import org.diiage.splittripwithyourfriends.entities.Participant;
+import org.diiage.splittripwithyourfriends.entities.Participation;
+import org.diiage.splittripwithyourfriends.entities.Spending;
 import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeTripFragment extends Fragment {
@@ -32,6 +38,9 @@ public class HomeTripFragment extends Fragment {
     private RecyclerView recyclerView;
     private ParticipantAdapter participantAdapter;
     private long tripId;
+    private CalculService calculService;
+    private List<Spending> lstSpendings;
+    private List<Participant> lstParticipants;
 
     public static HomeTripFragment newInstance() {
         return new HomeTripFragment();
@@ -55,12 +64,30 @@ public class HomeTripFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.participantAdapter = new ParticipantAdapter();
+        this.lstSpendings = new ArrayList<>();
+        this.lstParticipants = new ArrayList<>();
+        this.calculService = new CalculService();
+
         hViewModel.getAllParticipants(tripId).observe(this, participants -> {
-            participantAdapter.setParticipantsList(participants);
+            this.lstParticipants.clear();
+            this.lstParticipants.addAll(participants);
+            participantAdapter.setParticipantsList(hViewModel.getBalanceForParticipant(tripId,lstSpendings,lstParticipants));
+        });
+
+        hViewModel.getSpendingsByTrip(tripId).observe(this, s -> {
+            this.lstSpendings.clear();
+            this.lstSpendings.addAll(s);
+            participantAdapter.setParticipantsList(hViewModel.getBalanceForParticipant(tripId,lstSpendings,lstParticipants));
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(this.participantAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        participantAdapter.notifyDataSetChanged();
     }
 
 }

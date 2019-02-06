@@ -24,7 +24,7 @@ public class ParticipationRepository {
         return mParticipationDao.getAllParticipations();
     }
 
-    public LiveData<List<Participation>> getParticipationBySpending(long spendingId){
+    public List<Participation> getParticipationBySpending(long spendingId){
         return mParticipationDao.getParticipationsBySpending(spendingId);
     }
 

@@ -36,5 +36,5 @@ public interface DaoParticipation {
     LiveData<List<Participation>> getAllParticipations();
 
     @Query("select * from participations where spendingId= :spendingId")
-    LiveData<List<Participation>> getParticipationsBySpending(long spendingId);
+    List<Participation> getParticipationsBySpending(long spendingId);
 }
