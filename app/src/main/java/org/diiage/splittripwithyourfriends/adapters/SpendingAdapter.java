@@ -54,7 +54,7 @@ public class SpendingAdapter extends RecyclerView.Adapter {
             }
             else{
                 ((SpendingViewHolder) holder).txtSpendingName.setText(this.lstSpendings.get(position).getName());
-                String s = ""+this.lstSpendings.get(position).getPayerId();
+                String s = "Payeur : "+this.lstSpendings.get(position).getPayerId();
                 ((SpendingViewHolder) holder).txtPayerName.setText(s);
                 ((SpendingViewHolder) holder).txtSpendingMontant.setText((this.lstSpendings.get(position).getTotal()).toString());
             }

@@ -78,10 +78,10 @@ public abstract class SplitTripDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             tpDao.deleteAll();
             partDao.deleteAll();
+            spDao.deleteAll();
+            pDao.deleteAll();
             tDao.deleteAll();
             sDao.deleteAll();
-            pDao.deleteAll();
-            spDao.deleteAll();
 
             Statut statutV = new Statut("VALIDE");
             Statut statutC = new Statut("CLOS");
@@ -97,6 +97,9 @@ public abstract class SplitTripDatabase extends RoomDatabase {
             int sidOne = (int) sDao.insert(statutV);
             int sidTwo = (int) sDao.insert(statutC);
             int sidThree = (int) sDao.insert(statutA);
+            String stName1 = sDao.findStatutById(sidOne).getName();
+            String stName2 = sDao.findStatutById(sidOne).getName();
+            String stName3 = sDao.findStatutById(sidOne).getName();
 
             Trip tR = new Trip("Romane Trip",sidOne);
             Trip tM = new Trip("Matthew Trip",sidOne);

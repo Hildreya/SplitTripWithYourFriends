@@ -1,12 +1,10 @@
 package org.diiage.splittripwithyourfriends.adapters;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,13 +16,12 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
-import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
+import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
+import org.diiage.splittripwithyourfriends.repositories.StatutRepository;
 import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
-import org.w3c.dom.Text;
 
 import java.util.List;
-import java.util.MissingFormatArgumentException;
 
 public class TripAdapter extends RecyclerView.Adapter {
 
@@ -57,7 +54,19 @@ public class TripAdapter extends RecyclerView.Adapter {
         if (holder instanceof TripViewHolder) {
             ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).getName());
             long i = this.lstTrips.get(position).getStatutId();
-            String s = "Statut : "+i ;
+            String s = "Statut : "+i;
+            switch ((int)i){
+                case 1 :
+                    s="Statut : VALIDE";
+                    break;
+
+                case 2 :
+                    s="Statut : CLOS";
+                    break;
+                    case 3 :
+                    s="Statut : ANNULE";
+                    break;
+            }
             ((TripViewHolder) holder).txtTripStatutName.setText(s);
             String date = "Du : "+ this.lstTrips.get(position).getBeginDate() +" au "+ this.lstTrips.get(position).getEndDate();
             ((TripViewHolder) holder).txtDateTrip.setText(date);

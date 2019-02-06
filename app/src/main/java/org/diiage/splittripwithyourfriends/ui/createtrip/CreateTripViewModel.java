@@ -21,4 +21,6 @@ public class CreateTripViewModel extends AndroidViewModel {
     }
 
     public void insert(Trip trip){ mRepository.insert(trip); }
+
+    public long getFirstStatutId(){ return mRepository.getFirstStatutId();}
 }

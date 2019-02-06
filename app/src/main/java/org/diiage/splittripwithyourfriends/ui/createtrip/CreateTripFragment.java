@@ -112,8 +112,8 @@ public class CreateTripFragment extends Fragment implements View.OnClickListener
                     Toast.makeText(this.getContext(), R.string.start_date_after_end_date, Toast.LENGTH_LONG).show();
                 }
                 else {
-
-                    Trip t = new Trip(name,1);
+                    long i = mViewModel.getFirstStatutId();
+                    Trip t = new Trip(name,i);
                     t.setBeginDate(beginDate);
                     t.setEndDate(endDate);
                     mViewModel.insert(t);

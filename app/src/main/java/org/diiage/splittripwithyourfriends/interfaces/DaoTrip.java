@@ -28,6 +28,9 @@ public interface DaoTrip {
     @Query("SELECT * FROM trips WHERE tid = :id")
     Trip findTripById(long id);
 
+    @Query("SELECT sid FROM statuts Order by sid LIMIT 1")
+    long getFirstStatutId();
+
     @Update(onConflict = OnConflictStrategy.IGNORE)
     void update(Trip trip);
 
