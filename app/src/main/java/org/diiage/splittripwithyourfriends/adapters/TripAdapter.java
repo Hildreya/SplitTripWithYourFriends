@@ -21,6 +21,7 @@ import org.diiage.splittripwithyourfriends.entities.Trip;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
+import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.MissingFormatArgumentException;
@@ -31,12 +32,14 @@ public class TripAdapter extends RecyclerView.Adapter {
         public final View view;
         public final TextView txtTripName;
         public final TextView txtTripStatutName;
+        public final TextView txtDateTrip;
 
         public TripViewHolder(View itemView) {
             super(itemView);
             this.view = itemView;
             this.txtTripName = itemView.findViewById(R.id.txtTripName);
             this.txtTripStatutName = itemView.findViewById(R.id.txtTripStatutName);
+            this.txtDateTrip = itemView.findViewById(R.id.tvDateTrip);
         }
     }
 
@@ -56,6 +59,8 @@ public class TripAdapter extends RecyclerView.Adapter {
             long i = this.lstTrips.get(position).getStatutId();
             String s = "Statut : "+i ;
             ((TripViewHolder) holder).txtTripStatutName.setText(s);
+            String date = "Du : "+ this.lstTrips.get(position).getBeginDate() +" au "+ this.lstTrips.get(position).getEndDate();
+            ((TripViewHolder) holder).txtDateTrip.setText(date);
             String tripName= this.lstTrips.get(position).getName();
             long tripId= this.lstTrips.get(position).getId();
 

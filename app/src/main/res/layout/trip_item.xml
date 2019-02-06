@@ -49,4 +49,15 @@
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteTrip"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvDateTrip"
+        android:layout_width="282dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="(date)"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTripStatutName" />
+
 </android.support.constraint.ConstraintLayout>
