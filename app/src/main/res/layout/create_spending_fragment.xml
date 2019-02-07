@@ -31,7 +31,7 @@
 
             <EditText
                 android:id="@+id/spendingTitle"
-                android:layout_width="216dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
@@ -47,8 +47,8 @@
 
             <Spinner
                 android:id="@+id/fromSpinner"
-                android:layout_width="395dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="8dp"
@@ -72,10 +72,10 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/lstParticipants"
-                android:layout_width="395dp"
-                android:layout_height="377dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnCreateSpending"
@@ -87,7 +87,7 @@
             <Button
                 android:id="@+id/btnCreateSpending"
                 android:layout_width="wrap_content"
-                android:layout_height="46dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="8dp"
@@ -101,7 +101,7 @@
 
             <EditText
                 android:id="@+id/totalExpenses"
-                android:layout_width="157dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="4dp"
