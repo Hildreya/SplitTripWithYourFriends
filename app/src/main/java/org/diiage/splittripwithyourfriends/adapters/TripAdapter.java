@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.repositories.SpendingRepository;
 import org.diiage.splittripwithyourfriends.repositories.StatutRepository;
 import org.diiage.splittripwithyourfriends.repositories.TripRepository;
 import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
@@ -42,8 +44,10 @@ public class TripAdapter extends RecyclerView.Adapter {
 
     private List<Trip> lstTrips;
     private StatutRepository statutRepository;
-    public TripAdapter(StatutRepository statutRepository) {
+    private SpendingRepository spendingRepository;
+    public TripAdapter(StatutRepository statutRepository, SpendingRepository spendingRepository) {
         this.statutRepository=statutRepository;
+        this.spendingRepository=spendingRepository;
     }
 
 
@@ -83,12 +87,16 @@ public class TripAdapter extends RecyclerView.Adapter {
             btnDelete.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    //Show the dialog
-                    Context ctx = v.getContext();
-                    FragmentManager fm = ((AppCompatActivity)ctx).getFragmentManager();
-                    MainDeleteDialogFragment dialogFragment;
-                    dialogFragment = MainDeleteDialogFragment.newInstance(tripName, tripId);
-                    dialogFragment.show(fm, "dialog_trip_delete");
+                    if(spendingRepository.getNbSpendingOnTrip(tripId) >= 1) {
+                        Toast.makeText(v.getContext(),R.string.trip_foreign_key, Toast.LENGTH_LONG).show();
+                    } else {
+                        //Show the dialog
+                        Context ctx = v.getContext();
+                        FragmentManager fm = ((AppCompatActivity)ctx).getFragmentManager();
+                        MainDeleteDialogFragment dialogFragment;
+                        dialogFragment = MainDeleteDialogFragment.newInstance(tripName, tripId);
+                        dialogFragment.show(fm, "dialog_trip_delete");
+                    }
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {

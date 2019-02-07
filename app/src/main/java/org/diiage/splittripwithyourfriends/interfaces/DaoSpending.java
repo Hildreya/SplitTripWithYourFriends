@@ -40,4 +40,7 @@ public interface DaoSpending {
 
     @Query("select * from spendings where tripId= :tripId")
     LiveData<List<Spending>> getSpendingByTrip(long tripId);
+
+    @Query("select count(*) from spendings where tripId= :tripId")
+    int getNbSpendingOnTrip(long tripId);
 }
