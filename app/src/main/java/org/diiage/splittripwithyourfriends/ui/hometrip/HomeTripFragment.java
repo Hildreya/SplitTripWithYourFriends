@@ -27,6 +27,7 @@ import org.diiage.splittripwithyourfriends.databinding.HomeTripFragmentBinding;
 import org.diiage.splittripwithyourfriends.entities.Participant;
 import org.diiage.splittripwithyourfriends.entities.Participation;
 import org.diiage.splittripwithyourfriends.entities.Spending;
+import org.diiage.splittripwithyourfriends.repositories.ParticipationRepository;
 import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class HomeTripFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.participantAdapter = new ParticipantAdapter();
+        this.participantAdapter = new ParticipantAdapter(new ParticipationRepository(getActivity().getApplication()));
         this.lstSpendings = new ArrayList<>();
         this.lstParticipants = new ArrayList<>();
         this.calculService = new CalculService();

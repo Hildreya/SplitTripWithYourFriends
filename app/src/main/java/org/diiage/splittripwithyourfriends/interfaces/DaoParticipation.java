@@ -37,4 +37,7 @@ public interface DaoParticipation {
 
     @Query("select * from participations where spendingId= :spendingId")
     List<Participation> getParticipationsBySpending(long spendingId);
+
+    @Query("select * from participations where participantId= :participantId")
+    List<Participation> getParticipationsByParticipant(long participantId);
 }

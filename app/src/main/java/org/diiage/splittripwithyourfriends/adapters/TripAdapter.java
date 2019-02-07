@@ -61,7 +61,7 @@ public class TripAdapter extends RecyclerView.Adapter {
             long i = this.lstTrips.get(position).getStatutId();
             String s = statutRepository.getStatutNameById(i);
             ((TripViewHolder) holder).txtTripStatutName.setText(s);
-            String date = "Du : "+ this.lstTrips.get(position).getBeginDate() +" au "+ this.lstTrips.get(position).getEndDate();
+            String date = ((TripViewHolder) holder).view.getResources().getString(R.string.from_the) + ": "+ this.lstTrips.get(position).getBeginDate() +" "+((TripViewHolder) holder).view.getResources().getString(R.string.to_the)+" "+ this.lstTrips.get(position).getEndDate();
             ((TripViewHolder) holder).txtDateTrip.setText(date);
             String tripName= this.lstTrips.get(position).getName();
             long tripId= this.lstTrips.get(position).getId();

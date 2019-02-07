@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Participant;
 import org.diiage.splittripwithyourfriends.entities.TripParticipantJoin;
+import org.diiage.splittripwithyourfriends.repositories.ParticipationRepository;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripSaveDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
@@ -40,7 +42,13 @@ public class ParticipantAdapter extends RecyclerView.Adapter {
             this.balance = itemView.findViewById(R.id.balanceTextView);
         }
     }
+
+    private ParticipationRepository participationRepository;
     private List<Pair<Participant, Double>> lstParticipants;
+
+    public ParticipantAdapter(ParticipationRepository participationRepository) {
+        this.participationRepository = participationRepository;
+    }
 
     public void setParticipantsList(List<Pair<Participant, Double>> participantsList) {
         this.lstParticipants = participantsList;
@@ -85,24 +93,17 @@ public class ParticipantAdapter extends RecyclerView.Adapter {
             btnDelete.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    //Show the dialog
-                    Context ctx = v.getContext();
-                    FragmentManager fm = ((AppCompatActivity)ctx).getFragmentManager();
-                    HomeTripDeleteDialogFragment dialogFragment;
-                    dialogFragment = HomeTripDeleteDialogFragment.newInstance(participantName, participantId);
-                    dialogFragment.show(fm, "dialog_participant_delete");
-                }
-            });
+                    if(participationRepository.heParticipate(participantId)) {
+                        Toast.makeText(v.getContext(),R.string.participant_foreign_key, Toast.LENGTH_LONG).show();
+                    } else {
+                        //Show the dialog
+                        Context ctx = v.getContext();
+                        FragmentManager fm = ((AppCompatActivity)ctx).getFragmentManager();
+                        HomeTripDeleteDialogFragment dialogFragment;
+                        dialogFragment = HomeTripDeleteDialogFragment.newInstance(participantName, participantId);
+                        dialogFragment.show(fm, "dialog_participant_delete");
+                    }
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), HomeTripActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("ParamParticipantName", participantName);
-                    b.putLong("ParamParticipantId", participantId);
-                    intent.putExtras(b);
-                    v.getContext().startActivity(intent);
                 }
             });
         }

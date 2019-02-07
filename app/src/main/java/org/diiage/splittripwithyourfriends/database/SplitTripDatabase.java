@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
@@ -28,6 +29,7 @@ public abstract class SplitTripDatabase extends RoomDatabase {
     public abstract DaoSpending daoSpending();
     public abstract DaoParticipation daoParticipation();
 
+    private static Context _context;
     private static volatile SplitTripDatabase INSTANCE;
 
     //Singleton
@@ -39,11 +41,11 @@ public abstract class SplitTripDatabase extends RoomDatabase {
                             SplitTripDatabase.class, "SplitTrip_database")
                             .addCallback(sTripDatabaseCallBack)
                             .allowMainThreadQueries()
-                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
         }
+        _context = context;
         return INSTANCE;
     }
 
@@ -76,77 +78,88 @@ public abstract class SplitTripDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            tpDao.deleteAll();
-            partDao.deleteAll();
-            spDao.deleteAll();
-            pDao.deleteAll();
-            tDao.deleteAll();
-            sDao.deleteAll();
+            SharedPreferences mPreferences = _context.getSharedPreferences("first_time", Context.MODE_PRIVATE);
+            Boolean firstTime = mPreferences.getBoolean("firstTime", true);
 
-            Statut statutV = new Statut("VALIDE");
-            Statut statutC = new Statut("CLOS");
-            Statut statutA = new Statut("ANNULE");
+            if (firstTime) {
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putBoolean("firstTime", false);
+                editor.commit();
 
-            Participant p1 = new Participant("Romane");
-            Participant p2 = new Participant("Matthew");
-            Participant p3 = new Participant("Baboon");
-            Participant p4 = new Participant("Dylan");
-            Participant p5 = new Participant("Teepi");
 
-            //Récupération des id des statuts insérés
-            int sidOne = (int) sDao.insert(statutV);
-            int sidTwo = (int) sDao.insert(statutC);
-            int sidThree = (int) sDao.insert(statutA);
-            String stName1 = sDao.findStatutById(sidOne).getName();
-            String stName2 = sDao.findStatutById(sidOne).getName();
-            String stName3 = sDao.findStatutById(sidOne).getName();
+                tpDao.deleteAll();
+                partDao.deleteAll();
+                spDao.deleteAll();
+                pDao.deleteAll();
+                tDao.deleteAll();
+                sDao.deleteAll();
 
-            Trip tR = new Trip("Romane Trip",sidOne);
-            Trip tM = new Trip("Matthew Trip",sidOne);
-            Trip tS = new Trip("Summer Trip",sidTwo);
-            Trip tE = new Trip("English Trip",sidThree);
+                Statut statutV = new Statut("VALIDE");
+                Statut statutC = new Statut("CLOS");
+                Statut statutA = new Statut("ANNULE");
 
-            //Récupération des id des trips insérés
-            int tidOne = (int) tDao.insert(tR);
-            int tidTwo = (int) tDao.insert(tM);
-            int tidThree = (int) tDao.insert(tS);
-            int tidFour = (int) tDao.insert(tE);
+                Participant p1 = new Participant("Romane");
+                Participant p2 = new Participant("Matthew");
+                Participant p3 = new Participant("Baboon");
+                Participant p4 = new Participant("Dylan");
+                Participant p5 = new Participant("Teepi");
 
-            //Récupération des id des participants insérés
-            int pidOne = (int) pDao.insert(p1);
-            int pidTwo=(int) pDao.insert(p2);
-            int pidThree=(int) pDao.insert(p3);
-            int pidFour=(int) pDao.insert(p4);
-            int pidFive=(int) pDao.insert(p5);
+                //Récupération des id des statuts insérés
+                int sidOne = (int) sDao.insert(statutV);
+                int sidTwo = (int) sDao.insert(statutC);
+                int sidThree = (int) sDao.insert(statutA);
+                String stName1 = sDao.findStatutById(sidOne).getName();
+                String stName2 = sDao.findStatutById(sidOne).getName();
+                String stName3 = sDao.findStatutById(sidOne).getName();
 
-            TripParticipantJoin tpR1 = new TripParticipantJoin(tidOne, pidOne);
-            TripParticipantJoin tpR2 = new TripParticipantJoin(tidOne, pidTwo);
-            TripParticipantJoin tpR3 = new TripParticipantJoin(tidOne, pidFive);
+                Trip tR = new Trip("Romane Trip", sidOne);
+                Trip tM = new Trip("Matthew Trip", sidOne);
+                Trip tS = new Trip("Summer Trip", sidTwo);
+                Trip tE = new Trip("English Trip", sidThree);
 
-            TripParticipantJoin tpM1 = new TripParticipantJoin(tidTwo, pidOne);
-            TripParticipantJoin tpM2 = new TripParticipantJoin(tidTwo, pidTwo);
-            TripParticipantJoin tpM3 = new TripParticipantJoin(tidTwo, pidThree);
-            TripParticipantJoin tpM4 = new TripParticipantJoin(tidTwo, pidFour);
-            TripParticipantJoin tpM5 = new TripParticipantJoin(tidTwo, pidFive);
+                //Récupération des id des trips insérés
+                int tidOne = (int) tDao.insert(tR);
+                int tidTwo = (int) tDao.insert(tM);
+                int tidThree = (int) tDao.insert(tS);
+                int tidFour = (int) tDao.insert(tE);
 
-            TripParticipantJoin tpS1 = new TripParticipantJoin(tidThree, pidThree);
+                //Récupération des id des participants insérés
+                int pidOne = (int) pDao.insert(p1);
+                int pidTwo = (int) pDao.insert(p2);
+                int pidThree = (int) pDao.insert(p3);
+                int pidFour = (int) pDao.insert(p4);
+                int pidFive = (int) pDao.insert(p5);
 
-            tpDao.insert(tpR1,tpR2,tpR3,tpM1,tpM2,tpM3,tpM4,tpM5,tpS1);
+                TripParticipantJoin tpR1 = new TripParticipantJoin(tidOne, pidOne);
+                TripParticipantJoin tpR2 = new TripParticipantJoin(tidOne, pidTwo);
+                TripParticipantJoin tpR3 = new TripParticipantJoin(tidOne, pidFive);
 
-            Spending s1 = new Spending("Courses",150.45,null,pidFive,tidOne);
-            Spending s2 = new Spending("Location",860.60,null,pidOne,tidOne);
+                TripParticipantJoin tpM1 = new TripParticipantJoin(tidTwo, pidOne);
+                TripParticipantJoin tpM2 = new TripParticipantJoin(tidTwo, pidTwo);
+                TripParticipantJoin tpM3 = new TripParticipantJoin(tidTwo, pidThree);
+                TripParticipantJoin tpM4 = new TripParticipantJoin(tidTwo, pidFour);
+                TripParticipantJoin tpM5 = new TripParticipantJoin(tidTwo, pidFive);
 
-            //Récupération des id des participants insérés
-            int spidOne = (int) spDao.insert(s1);
-            int spidTwo=(int) spDao.insert(s2);
+                TripParticipantJoin tpS1 = new TripParticipantJoin(tidThree, pidThree);
 
-            Participation part1 = new Participation(spidOne,pidOne);
-            Participation part2 = new Participation(spidOne,pidFive);
-            Participation part3 = new Participation(spidTwo,pidOne);
-            Participation part4 = new Participation(spidTwo,pidTwo);
-            Participation part5 = new Participation(spidTwo,pidFive);
+                tpDao.insert(tpR1, tpR2, tpR3, tpM1, tpM2, tpM3, tpM4, tpM5, tpS1);
 
-            partDao.insert(part1,part2,part3,part4,part5);
+                Spending s1 = new Spending("Courses", 150.45, null, pidFive, tidOne);
+                Spending s2 = new Spending("Location", 860.60, null, pidOne, tidOne);
+
+                //Récupération des id des participants insérés
+                int spidOne = (int) spDao.insert(s1);
+                int spidTwo = (int) spDao.insert(s2);
+
+                Participation part1 = new Participation(spidOne, pidOne);
+                Participation part2 = new Participation(spidOne, pidFive);
+                Participation part3 = new Participation(spidTwo, pidOne);
+                Participation part4 = new Participation(spidTwo, pidTwo);
+                Participation part5 = new Participation(spidTwo, pidFive);
+
+                partDao.insert(part1, part2, part3, part4, part5);
+
+            }
 
             return null;
         }

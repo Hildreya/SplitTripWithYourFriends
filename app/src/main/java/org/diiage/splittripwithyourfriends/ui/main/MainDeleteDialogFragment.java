@@ -42,7 +42,7 @@ public class MainDeleteDialogFragment extends DialogFragment {
         tripIdExtra = args.getLong("tripIdToUpdate");
 
         alertDialogBuilder.setView(view)
-                .setTitle(getString(R.string.dialog_trip_title))
+                .setTitle(getString(R.string.dialog_trip_title_delete))
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

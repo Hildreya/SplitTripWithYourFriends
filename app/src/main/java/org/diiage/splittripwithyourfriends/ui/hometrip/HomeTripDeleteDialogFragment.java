@@ -44,7 +44,7 @@ public class HomeTripDeleteDialogFragment extends DialogFragment {
         participantIdExtra = args.getLong("participantIdToUpdate");
 
         alertDialogBuilder.setView(view)
-                .setTitle(getString(R.string.dialog_participant_title))
+                .setTitle(getString(R.string.dialog_participant_title_delete))
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -77,8 +77,8 @@ public class HomeTripDeleteDialogFragment extends DialogFragment {
             if (participantToDelete != null) {
                 if (participantToDelete.getName().equals(participantName)) {
                     participationdao.deleteWithParticipantId(participantToDelete.getId());
-                    LiveData<List<Participant>> p = participantDao.getAllParticipants();
-                    participantDao.delete(participantToDelete);
+//                    LiveData<List<Participant>> p = participantDao.getAllParticipants();
+//                    participantDao.delete(participantToDelete);
                 }
             }
         }

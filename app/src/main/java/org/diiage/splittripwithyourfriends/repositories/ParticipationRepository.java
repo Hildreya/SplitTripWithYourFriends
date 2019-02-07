@@ -36,6 +36,10 @@ public class ParticipationRepository {
         new insertAsyncTask(mParticipationDao).execute(participation);
     }
 
+    public boolean heParticipate(long participantId) {
+        return mParticipationDao.getParticipationsByParticipant(participantId).size() >= 1;
+    }
+
     private static class insertAsyncTask extends AsyncTask<Participation, Void, Void> {
 
         private DaoParticipation mAsyncTaskDao;
