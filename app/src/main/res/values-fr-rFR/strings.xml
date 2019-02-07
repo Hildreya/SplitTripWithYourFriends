@@ -8,18 +8,21 @@
     <string name="action_create_spending">Créer une dépense</string>
     <string name="emptyDate">(Date)</string>
     <string name="emptyName">Nom</string>
-    <string name="emptyMontant">0.00</string>
+    <string name="emptyMontant">0,00</string>
     <string name="addTripLibelle">Ajouter un séjour</string>
     <string name="start_date">Date de début</string>
     <string name="end_date">Date de fin</string>
     <string name="empty_not_saved">L\'entrée n\'est pas ajoutée car elle est vide.</string>
     <string name="start_date_after_end_date">La date de début est après la date de fin.</string>
     <string name="create_participant">Créer participant</string>
-    <string name="dialog_trip_title">Modification de séjour</string>
-    <string name="dialog_spending_title">Modification de dépense</string>
+    <string name="dialog_trip_title_update">Modification de séjour</string>
+    <string name="dialog_spending_title_update">Modification de dépense</string>
     <string name="title_participants">Aperçu général</string>
     <string name="title_spendings">Dépenses</string>
-    <string name="dialog_participant_title">Modification de participant</string>
+    <string name="dialog_participant_title_update">Modification de participant</string>
+    <string name="dialog_trip_title_delete">Suppression de séjour</string>
+    <string name="dialog_spending_title_delete">Suppression de dépense</string>
+    <string name="dialog_participant_title_delete">Suppression de participant</string>
     <string name="save">Sauvegarder</string>
     <string name="delete">Supprimer</string>
     <string name="cancel">Annuler</string>
@@ -31,4 +34,5 @@
     <string name="to">Pour</string>
     <string name="total_spending">Total dépense</string>
     <string name="no_participant_selected">Sélectionnez au minimum un participant.</string>
+    <string name="participant_foreign_key">Impossible d\'exécuter cette action car le participant est lié à une dépense.</string>
 </resources>

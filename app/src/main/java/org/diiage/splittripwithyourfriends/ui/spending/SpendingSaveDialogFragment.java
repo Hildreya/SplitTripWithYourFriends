@@ -47,7 +47,7 @@ public class SpendingSaveDialogFragment extends DialogFragment {
         }
 
         alertDialogBuilder.setView(view)
-                .setTitle(getString(R.string.dialog_spending_title))
+                .setTitle(getString(R.string.dialog_spending_title_update))
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

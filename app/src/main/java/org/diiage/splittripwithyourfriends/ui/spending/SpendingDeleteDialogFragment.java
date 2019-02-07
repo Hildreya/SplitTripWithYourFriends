@@ -44,7 +44,7 @@ public class SpendingDeleteDialogFragment extends DialogFragment {
         spendingIdExtra = args.getLong("spendingIdToUpdate");
 
         alertDialogBuilder.setView(view)
-                .setTitle(getString(R.string.dialog_spending_title))
+                .setTitle(getString(R.string.dialog_spending_title_delete))
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

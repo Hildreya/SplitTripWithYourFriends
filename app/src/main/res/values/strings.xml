@@ -15,11 +15,14 @@
     <string name="no_participant_selected">Select one participant minimum.</string>
     <string name="start_date_after_end_date">The start date is after the end date.</string>
     <string name="create_participant">Create participant</string>
-    <string name="dialog_trip_title">Update Trip</string>
-    <string name="dialog_spending_title">Update Spending</string>
+    <string name="dialog_trip_title_update">Update Trip</string>
+    <string name="dialog_spending_title_update">Update Spending</string>
+    <string name="dialog_participant_title_update">Update Participant</string>
     <string name="title_participants">General overview</string>
     <string name="title_spendings">Spendings</string>
-    <string name="dialog_participant_title">Update Participant</string>
+    <string name="dialog_trip_title_delete">Delete Trip</string>
+    <string name="dialog_spending_title_delete">Delete Spending</string>
+    <string name="dialog_participant_title_delete">Delete Participant</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
@@ -30,4 +33,5 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="total_spending">Spending Total </string>
+    <string name="participant_foreign_key">Impossible to perform this action because the participant is linked to an expense.</string>
 </resources>
