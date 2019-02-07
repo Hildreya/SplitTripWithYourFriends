@@ -1,9 +1,11 @@
 package org.diiage.splittripwithyourfriends;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.diiage.splittripwithyourfriends.databinding.AddParticipantActivityBinding;
 import org.diiage.splittripwithyourfriends.ui.addparticipant.AddParticipantFragment;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripFragment;
 
@@ -12,7 +14,7 @@ public class AddParticipantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_participant_activity);
+        AddParticipantActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.add_participant_activity);
         if (savedInstanceState == null) {
             Bundle args = getIntent().getExtras();
             Bundle b = new Bundle();

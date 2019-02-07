@@ -1,6 +1,7 @@
 package org.diiage.splittripwithyourfriends.ui.createspending;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.adapters.SelectableParticipantAdapter;
 import org.diiage.splittripwithyourfriends.adapters.SelectableParticipantViewHolder;
+import org.diiage.splittripwithyourfriends.databinding.CreateSpendingFragmentBinding;
 import org.diiage.splittripwithyourfriends.entities.Participant;
 import org.diiage.splittripwithyourfriends.entities.Participation;
 import org.diiage.splittripwithyourfriends.entities.Spending;
@@ -49,7 +51,8 @@ public class CreateSpendingFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.create_spending_fragment, container, false);
+        CreateSpendingFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.create_spending_fragment, container, false);
+        View view = binding.getRoot();
         mViewModel = ViewModelProviders.of(this).get(CreateSpendingViewModel.class);
         this.tripId = getArguments().getLong("ParamTripId");
 
