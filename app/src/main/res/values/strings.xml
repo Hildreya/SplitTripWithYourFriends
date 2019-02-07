@@ -34,4 +34,6 @@
     <string name="to">To</string>
     <string name="total_spending">Spending Total </string>
     <string name="participant_foreign_key">Impossible to perform this action because the participant is linked to an expense.</string>
+    <string name="from_the">From the</string>
+    <string name="to_the">to the</string>
 </resources>

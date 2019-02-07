@@ -35,4 +35,6 @@
     <string name="total_spending">Total dépense</string>
     <string name="no_participant_selected">Sélectionnez au minimum un participant.</string>
     <string name="participant_foreign_key">Impossible d\'exécuter cette action car le participant est lié à une dépense.</string>
+    <string name="from_the">Du</string>
+    <string name="to_the">au</string>
 </resources>

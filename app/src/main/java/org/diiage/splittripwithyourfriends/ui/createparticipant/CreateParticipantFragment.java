@@ -31,7 +31,7 @@ public class CreateParticipantFragment extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        CreateParticipantFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.create_participant_activity, container,false);
+        CreateParticipantFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.create_participant_fragment, container,false);
         View view = binding.getRoot();
 
         txtParticipantName = view.findViewById(R.id.txtParticipantName);
