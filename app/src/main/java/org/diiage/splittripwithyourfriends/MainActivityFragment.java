@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import org.diiage.splittripwithyourfriends.adapters.TripAdapter;
 import org.diiage.splittripwithyourfriends.databinding.FragmentMainBinding;
+import org.diiage.splittripwithyourfriends.repositories.SpendingRepository;
 import org.diiage.splittripwithyourfriends.repositories.StatutRepository;
 import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
@@ -45,7 +46,8 @@ public class MainActivityFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         StatutRepository statutRepository= new StatutRepository(getActivity().getApplication());
-        this.tripAdapter = new TripAdapter(statutRepository);
+        SpendingRepository spendingRepository= new SpendingRepository(getActivity().getApplication());
+        this.tripAdapter = new TripAdapter(statutRepository, spendingRepository);
         mainFragmentViewModel.getmAllTrips().observe(this, trips -> {
             tripAdapter.setTrips(trips);
         });
