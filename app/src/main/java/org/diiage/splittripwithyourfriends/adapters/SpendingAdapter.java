@@ -97,17 +97,6 @@ public class SpendingAdapter extends RecyclerView.Adapter {
                 }
             });
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("ParamParticipantName", spendingName);
-                    b.putLong("ParamParticipantId", spendingId);
-                    intent.putExtras(b);
-                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 
