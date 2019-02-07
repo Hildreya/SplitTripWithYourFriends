@@ -17,20 +17,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(view -> {
             Intent i = new Intent(this, CreateTripActivity.class);
-            startActivity(i);
-        });
-
-        Button btn = (Button) findViewById(R.id.button2);
-
-        btn.setOnClickListener(view -> {
-            Intent i = new Intent(this, HomeTripActivity.class);
             startActivity(i);
         });
     }
@@ -49,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_create_participant) {
+            Intent i = new Intent(this, CreateParticipantActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

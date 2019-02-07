@@ -1,7 +1,40 @@
 package org.diiage.splittripwithyourfriends.ui.addparticipant;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.content.ClipData;
+import android.support.annotation.NonNull;
 
-public class AddParticipantViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import org.diiage.splittripwithyourfriends.entities.Participant;
+import org.diiage.splittripwithyourfriends.repositories.ParticipantRepository;
+import org.diiage.splittripwithyourfriends.repositories.TripParticipantRepository;
+
+import java.util.List;
+
+public class AddParticipantViewModel extends AndroidViewModel {
+
+    private ParticipantRepository participantRepository;
+    private TripParticipantRepository tripParticipantRepository;
+
+    public AddParticipantViewModel(Application application) {
+        super(application);
+        participantRepository = new ParticipantRepository(application);
+        tripParticipantRepository = new TripParticipantRepository(application);
+    }
+
+    public LiveData<List<Participant>> getmUnregisteredParticipants(long tripId) {
+        return participantRepository.getUnregisteredParticipants(tripId);
+    }
+
+    public LiveData<List<Participant>> getAllParticipants(long id) {
+        return participantRepository.getAllParticipants(id);
+    }
+
+    public void registerParticipants(List<Participant> participants, long tripId) {
+        for(Participant participant : participants) {
+            tripParticipantRepository.registerParticipant(participant.getId(),tripId);
+        }
+    }
 }
+

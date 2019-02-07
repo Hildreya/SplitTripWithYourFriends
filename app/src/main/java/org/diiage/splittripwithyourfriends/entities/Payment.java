@@ -3,18 +3,19 @@ package org.diiage.splittripwithyourfriends.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
 
 import java.util.Date;
 
 @Entity(tableName = "Payments", foreignKeys = {
-        @ForeignKey(entity = Spending.class, parentColumns = "id", childColumns = "spendingId"),
-        @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "payerId")
-})
+        @ForeignKey(entity = Spending.class, parentColumns = "spid", childColumns = "spendingId"),
+        @ForeignKey(entity = Participant.class, parentColumns = "pid", childColumns = "payerId")
+}, indices = {@Index("payerId"), @Index("spendingId")})
 public class Payment {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    @ColumnInfo(name = "payId")
+    private long id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -23,16 +24,15 @@ public class Payment {
     private  String montant;
 
     @ColumnInfo(name = "date")
-    @TypeConverters(DateConverter.class)
     private Date date;
 
     @ColumnInfo(name = "payerId")
-    private int payerId;
+    private long payerId;
 
     @ColumnInfo(name = "spendingId")
-    private int spendingId;
+    private long spendingId;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -60,23 +60,23 @@ public class Payment {
         this.date = date;
     }
 
-    public int getPayerId() {
+    public long getPayerId() {
         return payerId;
     }
 
-    public void setPayerId(int payerId) {
+    public void setPayerId(long payerId) {
         this.payerId = payerId;
     }
 
-    public int getSpendingId() {
+    public long getSpendingId() {
         return spendingId;
     }
 
-    public void setSpendingId(int spendingId) {
+    public void setSpendingId(long spendingId) {
         this.spendingId = spendingId;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

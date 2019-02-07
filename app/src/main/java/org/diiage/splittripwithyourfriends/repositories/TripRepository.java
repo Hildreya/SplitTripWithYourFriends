@@ -19,7 +19,7 @@ public class TripRepository {
 
     public TripRepository(Application application) {
         SplitTripDatabase db = SplitTripDatabase.getDatabase(application);
-        mTripDao= db.daoAccess();
+        mTripDao= db.daoTrip();
         mAllTrips= mTripDao.getAllTrips();
     }
 
@@ -29,6 +29,9 @@ public class TripRepository {
 
     public void insert(Trip trip){
         new insertAsyncTask(mTripDao).execute(trip);
+    }
+    public long getFirstStatutId(){
+        return mTripDao.getFirstStatutId();
     }
 
     private static class insertAsyncTask extends AsyncTask<Trip, Void, Void> {
@@ -41,7 +44,7 @@ public class TripRepository {
 
         @Override
         protected Void doInBackground(final Trip ... params) {
-            mAsyncTaskDao.insertTrip(params[0]);
+            mAsyncTaskDao.insert(params[0]);
             return null;
         }
     }

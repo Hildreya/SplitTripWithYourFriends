@@ -1,16 +1,33 @@
 <resources>
     <string name="app_name">SplitTrip with your friends</string>
     <string name="action_settings">Settings</string>
-    <string name="emptyDate">01/01/2000</string>
+    <string name="emptyDate">(Date)</string>
+    <string name="emptyMontant">0.00</string>
     <string name="emptyName">Name</string>
     <string name="action_add_participant">Add participant</string>
-
-    <string name="hint_word">Word...</string>
-    <string name="button_save">Save</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_create">Create</string>
+    <string name="action_create_spending">Create spending</string>
     <string name="participant_name">Participant\'s name</string>
+    <string name="addTripLibelle">Add a trip</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="empty_not_saved">Entry not saved because it is empty.</string>
+    <string name="no_participant_selected">Select one participant minimum.</string>
+    <string name="start_date_after_end_date">The start date is after the end date.</string>
+    <string name="create_participant">Create participant</string>
+    <string name="dialog_trip_title">Update Trip</string>
+    <string name="dialog_spending_title">Update Spending</string>
+    <string name="title_participants">General overview</string>
+    <string name="title_spendings">Spendings</string>
+    <string name="dialog_participant_title">Update Participant</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirmDeleteTrip">Are you sure to delete this trip ?</string>
+    <string name="confirmDeleteSpending">Are you sure to delete this spending ?</string>
+    <string name="confirmDeleteParticipant">Are you sure to delete this participant ?</string>
+    <string name="spending_title">Spending title</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="total_spending">Spending Total </string>
 </resources>

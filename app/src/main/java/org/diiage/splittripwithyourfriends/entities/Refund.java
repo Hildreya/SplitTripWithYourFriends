@@ -3,34 +3,36 @@ package org.diiage.splittripwithyourfriends.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "Refunds", foreignKeys = {
-        @ForeignKey(entity = Trip.class, parentColumns = "id", childColumns = "tripId"),
-        @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "emetteurId"),
-        @ForeignKey(entity = Participant.class, parentColumns = "id", childColumns = "receveurId")
-})
+@Entity(tableName = "Refunds",
+        foreignKeys = { @ForeignKey(entity = Trip.class, parentColumns = "tid", childColumns = "tripId"),
+        @ForeignKey(entity = Participant.class, parentColumns = "pid", childColumns = "emetteurId"),
+        @ForeignKey(entity = Participant.class, parentColumns = "pid", childColumns = "receveurId")},
+        indices = {@Index("emetteurId"), @Index("receveurId"), @Index("tripId")})
 public class Refund {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    @ColumnInfo(name = "rid")
+    private long id;
 
     @ColumnInfo(name = "emetteurId")
-    private int emetteurId;
+    private long emetteurId;
 
     @ColumnInfo(name = "receveurId")
-    private int receveurId;
+    private long receveurId;
 
     @ColumnInfo(name = "amount")
     private String amount;
 
     @ColumnInfo(name = "tripId")
-    private int tripId;
+    private long tripId;
 
-    public int getEmetteurId() {
+    public long getEmetteurId() {
         return emetteurId;
     }
 
-    public void setEmetteurId(int emetteurId) {
+    public void setEmetteurId(long emetteurId) {
         this.emetteurId = emetteurId;
     }
 
@@ -42,25 +44,25 @@ public class Refund {
         this.amount = montant;
     }
 
-    public int getReceveurId() {
+    public long getReceveurId() {
         return receveurId;
     }
-    public void setReceveurId(int receveurId) {
+    public void setReceveurId(long receveurId) {
         this.receveurId = receveurId;
     }
 
-    public int getTripId() {
+    public long getTripId() {
         return tripId;
     }
-    public void setTripId(int tripId) {
+    public void setTripId(long tripId) {
         this.tripId = tripId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }
