@@ -10,7 +10,7 @@
         android:id="@+id/etTripName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="@string/emptyName"
         android:inputType="textCapWords"
         android:layout_marginBottom="16dp"/>
 </LinearLayout>

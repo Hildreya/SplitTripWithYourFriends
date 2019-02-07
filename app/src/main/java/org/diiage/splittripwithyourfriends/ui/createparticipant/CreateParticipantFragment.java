@@ -1,6 +1,7 @@
 package org.diiage.splittripwithyourfriends.ui.createparticipant;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.diiage.splittripwithyourfriends.R;
+import org.diiage.splittripwithyourfriends.databinding.CreateParticipantFragmentBinding;
 import org.diiage.splittripwithyourfriends.entities.Participant;
 
 public class CreateParticipantFragment extends Fragment implements View.OnClickListener {
@@ -29,8 +31,8 @@ public class CreateParticipantFragment extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.create_participant_fragment, container, false);
+        CreateParticipantFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.create_participant_activity, container,false);
+        View view = binding.getRoot();
 
         txtParticipantName = view.findViewById(R.id.txtParticipantName);
         btnCreateParticipant = view.findViewById(R.id.btnCreateParticipant);
