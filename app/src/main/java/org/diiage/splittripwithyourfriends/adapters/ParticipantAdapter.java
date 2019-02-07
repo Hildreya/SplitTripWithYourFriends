@@ -106,18 +106,6 @@ public class ParticipantAdapter extends RecyclerView.Adapter {
 
                 }
             });
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), HomeTripActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("ParamParticipantName", participantName);
-                    b.putLong("ParamParticipantId", participantId);
-                    intent.putExtras(b);
-                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 
