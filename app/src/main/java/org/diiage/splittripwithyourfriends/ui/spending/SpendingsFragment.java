@@ -19,6 +19,7 @@ import org.diiage.splittripwithyourfriends.adapters.ParticipantAdapter;
 import org.diiage.splittripwithyourfriends.adapters.SpendingAdapter;
 import org.diiage.splittripwithyourfriends.databinding.HomeTripFragmentBinding;
 import org.diiage.splittripwithyourfriends.databinding.SpendingsFragmentBinding;
+import org.diiage.splittripwithyourfriends.repositories.ParticipantRepository;
 import org.diiage.splittripwithyourfriends.ui.hometrip.HomeTripViewModel;
 
 public class SpendingsFragment extends Fragment {
@@ -49,7 +50,7 @@ public class SpendingsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.spendingAdapter = new SpendingAdapter();
+        this.spendingAdapter = new SpendingAdapter(new ParticipantRepository(getActivity().getApplication()));
         spViewModel.getAllSpendings(tripId).observe(this, spendings -> {
             spendingAdapter.setSpendingsList(spendings);
         });

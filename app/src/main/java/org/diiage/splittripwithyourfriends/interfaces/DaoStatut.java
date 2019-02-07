@@ -33,4 +33,7 @@ public interface DaoStatut {
 
     @Query("SELECT * FROM statuts ORDER BY name ASC")
     LiveData<List<Statut>> getAllStatuts();
+
+    @Query("SELECT name FROM statuts WHERE sid= :id LIMIT 1")
+    String getStatutNameById(long id);
 }
