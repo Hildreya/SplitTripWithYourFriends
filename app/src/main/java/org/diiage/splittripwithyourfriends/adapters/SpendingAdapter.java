@@ -16,6 +16,7 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.MainActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Spending;
+import org.diiage.splittripwithyourfriends.repositories.ParticipantRepository;
 import org.diiage.splittripwithyourfriends.ui.spending.SpendingDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.spending.SpendingSaveDialogFragment;
 
@@ -39,6 +40,12 @@ public class SpendingAdapter extends RecyclerView.Adapter {
     }
 
     private List<Spending> lstSpendings;
+    private ParticipantRepository participantRepository;
+
+    public SpendingAdapter(ParticipantRepository repository) {
+        this.participantRepository=repository;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,7 +61,9 @@ public class SpendingAdapter extends RecyclerView.Adapter {
             }
             else{
                 ((SpendingViewHolder) holder).txtSpendingName.setText(this.lstSpendings.get(position).getName());
-                String s = "Payeur : "+this.lstSpendings.get(position).getPayerId();
+                long i = this.lstSpendings.get(position).getPayerId();
+                String participantName = participantRepository.getParticipant(i).getName();
+                String s = "Payeur : "+participantName;
                 ((SpendingViewHolder) holder).txtPayerName.setText(s);
                 ((SpendingViewHolder) holder).txtSpendingMontant.setText((this.lstSpendings.get(position).getTotal()).toString());
             }

@@ -16,8 +16,8 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.HomeTripActivity;
 import org.diiage.splittripwithyourfriends.R;
 import org.diiage.splittripwithyourfriends.entities.Trip;
-import org.diiage.splittripwithyourfriends.interfaces.DaoStatut;
 import org.diiage.splittripwithyourfriends.repositories.StatutRepository;
+import org.diiage.splittripwithyourfriends.repositories.TripRepository;
 import org.diiage.splittripwithyourfriends.ui.main.MainDeleteDialogFragment;
 import org.diiage.splittripwithyourfriends.ui.main.MainSaveDialogFragment;
 
@@ -41,6 +41,11 @@ public class TripAdapter extends RecyclerView.Adapter {
     }
 
     private List<Trip> lstTrips;
+    private StatutRepository statutRepository;
+    public TripAdapter(StatutRepository statutRepository) {
+        this.statutRepository=statutRepository;
+    }
+
 
     @NonNull
     @Override
@@ -54,19 +59,7 @@ public class TripAdapter extends RecyclerView.Adapter {
         if (holder instanceof TripViewHolder) {
             ((TripViewHolder) holder).txtTripName.setText(this.lstTrips.get(position).getName());
             long i = this.lstTrips.get(position).getStatutId();
-            String s = "Statut : "+i;
-            switch ((int)i){
-                case 1 :
-                    s="Statut : VALIDE";
-                    break;
-
-                case 2 :
-                    s="Statut : CLOS";
-                    break;
-                    case 3 :
-                    s="Statut : ANNULE";
-                    break;
-            }
+            String s = statutRepository.getStatutNameById(i);
             ((TripViewHolder) holder).txtTripStatutName.setText(s);
             String date = "Du : "+ this.lstTrips.get(position).getBeginDate() +" au "+ this.lstTrips.get(position).getEndDate();
             ((TripViewHolder) holder).txtDateTrip.setText(date);

@@ -24,6 +24,10 @@ public class StatutRepository {
         return mAllStatuts;
     }
 
+    public String getStatutNameById(long id){
+        return daoStatut.getStatutNameById(id);
+    }
+
     public void insert(Statut statut){
         new insertAsyncTask(daoStatut).execute(statut);
     }

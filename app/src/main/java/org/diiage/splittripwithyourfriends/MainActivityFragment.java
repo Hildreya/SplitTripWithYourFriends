@@ -22,6 +22,8 @@ import android.widget.TextView;
 import org.diiage.splittripwithyourfriends.adapters.TripAdapter;
 import org.diiage.splittripwithyourfriends.databinding.FragmentMainBinding;
 import org.diiage.splittripwithyourfriends.entities.Trip;
+import org.diiage.splittripwithyourfriends.repositories.StatutRepository;
+import org.diiage.splittripwithyourfriends.repositories.TripRepository;
 import org.diiage.splittripwithyourfriends.ui.main.MainFragmentViewModel;
 
 import java.util.ArrayList;
@@ -54,7 +56,8 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.tripAdapter = new TripAdapter();
+        StatutRepository statutRepository= new StatutRepository(getActivity().getApplication());
+        this.tripAdapter = new TripAdapter(statutRepository);
         mainFragmentViewModel.getmAllTrips().observe(this, trips -> {
             tripAdapter.setTrips(trips);
         });
